@@ -21,8 +21,8 @@ const routes = [
         meta: { permissions: "dashboard-view" }
     },
     {
-        path: "/profile-builder", component: () => setComponent("builder/profile/profileBuilder"), name: "Users",
-        meta: { permissions: "users-view" }
+        path: "/Categories", component: () => setComponent("category/categories"), name: "Categories",
+        meta: { permissions: "categories-view" }
     },
     // {
     //     path: "/users", component: () => setComponent("user/Users"), name: "Users",

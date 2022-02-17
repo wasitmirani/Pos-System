@@ -23032,13 +23032,13 @@ var routes = [{
     permissions: "dashboard-view"
   }
 }, {
-  path: "/profile-builder",
+  path: "/Categories",
   component: function component() {
-    return setComponent("builder/profile/profileBuilder");
+    return setComponent("category/categories");
   },
-  name: "Users",
+  name: "Categories",
   meta: {
-    permissions: "users-view"
+    permissions: "categories-view"
   }
 } // {
 //     path: "/users", component: () => setComponent("user/Users"), name: "Users",
@@ -44222,15 +44222,15 @@ var map = {
 		9,
 		"resources_js_components_backend_components_breadcrumbComponent_vue"
 	],
-	"./components/backend/pages/builder/profile/profileBuilderComponent": [
-		"./resources/js/components/backend/pages/builder/profile/profileBuilderComponent.vue",
+	"./components/backend/pages/category/CategoriesComponent": [
+		"./resources/js/components/backend/pages/category/CategoriesComponent.vue",
 		9,
-		"resources_js_components_backend_pages_builder_profile_profileBuilderComponent_vue"
+		"resources_js_components_backend_pages_category_CategoriesComponent_vue"
 	],
-	"./components/backend/pages/builder/profile/profileBuilderComponent.vue": [
-		"./resources/js/components/backend/pages/builder/profile/profileBuilderComponent.vue",
+	"./components/backend/pages/category/CategoriesComponent.vue": [
+		"./resources/js/components/backend/pages/category/CategoriesComponent.vue",
 		9,
-		"resources_js_components_backend_pages_builder_profile_profileBuilderComponent_vue"
+		"resources_js_components_backend_pages_category_CategoriesComponent_vue"
 	],
 	"./components/backend/pages/dashboard/HomeComponent": [
 		"./resources/js/components/backend/pages/dashboard/HomeComponent.vue",
@@ -44417,7 +44417,7 @@ module.exports = JSON.parse('{"name":"axios","version":"0.21.4","description":"P
 /******/ 		// This function allow to reference async chunks
 /******/ 		__webpack_require__.u = (chunkId) => {
 /******/ 			// return url for filenames not based on template
-/******/ 			if ({"resources_js_components_backend_components_breadcrumbComponent_vue":1,"resources_js_components_backend_pages_builder_profile_profileBuilderComponent_vue":1,"resources_js_components_backend_pages_dashboard_HomeComponent_vue":1,"resources_js_components_welcome_vue":1}[chunkId]) return "js/" + chunkId + ".js";
+/******/ 			if ({"resources_js_components_backend_components_breadcrumbComponent_vue":1,"resources_js_components_backend_pages_category_CategoriesComponent_vue":1,"resources_js_components_backend_pages_dashboard_HomeComponent_vue":1,"resources_js_components_welcome_vue":1}[chunkId]) return "js/" + chunkId + ".js";
 /******/ 			// return url for filenames based on template
 /******/ 			return undefined;
 /******/ 		};
