@@ -1,22 +1,7 @@
 <template>
   <div>
          <!-- Page-Title -->
-                    <div class="row">
-                        <div class="col-sm-12">
-                            <div class="page-title-box">
-                                <div class="float-end">
-                                    <ol class="breadcrumb">
-                                        <li class="breadcrumb-item"><a href="#">Unikit</a>
-                                        </li><!--end nav-item-->
-                                        <li class="breadcrumb-item"><a href="#">Dashboard</a>
-                                        </li><!--end nav-item-->
-                                        <li class="breadcrumb-item active">Analytics</li>
-                                    </ol>
-                                </div>
-                                <h4 class="page-title">Analytics</h4>
-                            </div><!--end page-title-box-->
-                        </div><!--end col-->
-                    </div>
+            <breadcrumb active_name="Dashboard"/>
                     <!-- end page title end breadcrumb -->
 
                     <div class="row">
@@ -351,7 +336,9 @@
   </div>
 </template>
 <script>
+import breadcrumb from "../../components/breadcrumbComponent.vue"
 export default {
+    components:{breadcrumb},
     setup: () => ({
         title: 'How To Install Vue 3 in Laravel 8 From Scratch'
     })

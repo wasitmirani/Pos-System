@@ -26,10 +26,10 @@ const routes = [
         meta: { permissions: "dashboard-view" }
     },
 
-    // {
-    //     path: "/users", component: () => setComponent("user/Users"), name: "Users",
-    //     meta: { permissions: "users-view" }
-    // },
+    {
+        path: "/categories", component: () => setComponent("category/Categories"), name: "Categories",
+        meta: { permissions: "categories-view" }
+    },
     // {
     //     path: "/container/receives", component: () => setComponent("receive/Receives"), name: "Users",
     //     meta: { permissions: "receives-view" }
