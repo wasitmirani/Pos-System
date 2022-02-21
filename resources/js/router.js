@@ -8,7 +8,8 @@ function setComponent(path_file) {
     return import("" + route_path);
 }
 const routes = [
-    { path: "/:catchAll(.*)",
+    {
+    path: "/:catchAll(.*)",
     name: "NotFound",
     component: () => setComponent("error/404") },
     { path: "/unauthorized/user", component: () => setComponent("error/401"),name: "unauthorized" },
@@ -20,10 +21,7 @@ const routes = [
         path: "/home/dashboard", component: () => setComponent("dashboard/Home"), name: "Dashboard",
         meta: { permissions: "dashboard-view" }
     },
-    {
-        path: "/Categories", component: () => setComponent("category/categories"), name: "Categories",
-        meta: { permissions: "categories-view" }
-    },
+
     // {
     //     path: "/users", component: () => setComponent("user/Users"), name: "Users",
     //     meta: { permissions: "users-view" }

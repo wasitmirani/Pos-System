@@ -14,8 +14,12 @@ use Illuminate\Support\Facades\Route;
 */
 
 
-Route::view('login', 'auth.login')->name('login');
 
+Route::view('login', 'auth.login')->name('login');
+Route::get('/error-404', function () {
+    return view('backend.error-404');
+})->name('error-404');
 Route::view('/{any?}', 'backend.index')->where('any', '.*')->middleware(['auth']);
+
 
 require __DIR__.'/auth.php';
