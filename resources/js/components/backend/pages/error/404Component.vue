@@ -1,12 +1,17 @@
 <template>
+<div>
 
+</div>
 </template>
 
 <script>
 export default {
+created(){
+      window.location.href="/error-404"
+},
 mounted(){
-    alert("hh");
-   window.location.href="/error-404"
+      window.location.href="/error-404"
+//    window.location.href="/error-404"
 }
 }
 </script>

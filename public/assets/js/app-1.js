@@ -140,12 +140,14 @@
    }
    function hideDropdowns(dropdown) {
      var currentMenu = dropdown.querySelector('.dropdown-menu');
+     if(currentMenu){
      var nestedMenus = currentMenu.querySelectorAll('.dropdown-menu');
      if (nestedMenus) {
        [].forEach.call(nestedMenus, function(menu) {
          menu.classList.remove('show');
        });
      }
+    }
    }
    [].forEach.call(dropdowns, function(dropdown) {
      var toggle = dropdown.querySelector('[data-bs-toggle="dropdown"]');

@@ -11,7 +11,11 @@ const routes = [
     {
     path: "/:catchAll(.*)",
     name: "NotFound",
-    component: () => setComponent("error/404") },
+    redirect: { path: '/not-found' }
+    // component: () => setComponent("error/404")
+
+},
+{ path: "/not-found", component: () => setComponent("error/404"),name: "notfound" },
     { path: "/unauthorized/user", component: () => setComponent("error/401"),name: "unauthorized" },
     {
         path: "/",

@@ -22,12 +22,12 @@
                                 <h1 class="mt-5 mb-4">404!</h1>
                                 <h5 class="font-16 text-muted mb-5">Somthing went wrong</h5>
                             </div>
-                            <a class="btn btn-primary w-100" href="index.html">Back to Dashboard <i class="fas fa-redo ml-1"></i></a>
+                            <a class="btn btn-primary w-100" href="{{route('login')}}">Back to Dashboard <i class="fas fa-redo ml-1"></i></a>
                         </div><!--end card-body-->
                         <div class="card-body bg-light-alt text-center">
                             © <script>
                                 document.write(new Date().getFullYear())
-                            </script>2022 Unikit
+                            </script>2022 {{config('app.name')}}
                         </div><!--end card-body-->
                     </div><!--end card-->
                 </div><!--end col-->
