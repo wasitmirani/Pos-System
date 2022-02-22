@@ -6,7 +6,7 @@
                             <div class="card">
                                 <div class="card-body p-0">
                                     <div class="media p-3  align-items-center">
-                                        <img src="assets/images/users/user-1.jpg" alt="user" class="rounded-circle thumb-lg">
+                                        <AvatarComponent name="Merri Diamond"/>
                                         <div class="media-body ms-3 align-self-center">
                                             <h5 class="m-0">Merri Diamond <span class="badge badge-warning font-10">New</span></h5>
                                             <p class="mb-0 text-muted">@SaraHopkins.com</p>
@@ -23,7 +23,7 @@
                             <div class="card">
                                 <div class="card-body p-0">
                                     <div class="media p-3  align-items-center">
-                                        <img src="assets/images/users/user-5.jpg" alt="user" class="rounded-circle thumb-lg">
+                                        <AvatarComponent name="Paul Schmidt "/>
                                         <div class="media-body ms-3 align-self-center">
                                             <h5 class="m-0">Paul Schmidt <span class="badge badge-secondary font-10">New</span></h5>
                                             <p class="mb-0 text-muted">@SaraHopkins.com</p>
@@ -40,7 +40,7 @@
                             <div class="card">
                                 <div class="card-body p-0">
                                     <div class="media p-3  align-items-center">
-                                        <img src="assets/images/users/user-8.jpg" alt="user" class="rounded-circle thumb-lg">
+                                        <AvatarComponent name="Harry McCall"/>
                                         <div class="media-body ms-3 align-self-center">
                                             <h5 class="m-0">Harry McCall</h5>
                                             <p class="mb-0 text-muted">@SaraHopkins.com</p>
@@ -58,7 +58,7 @@
                         <div class="col-lg-6">
                             <ul class="list-inline">
                                 <li class="list-inline-item">
-                                    <h5 class="mt-0">Here the list of all categories. <span class="badge badge-pink">6</span></h5>
+                                    <h5 class="mt-0">Here the list of all categories. <span class="badge badge-primary">{{categories.length}}</span></h5>
                                 </li>
                             </ul>
                         </div><!--end col-->
@@ -126,11 +126,18 @@
 <script>
 import breadcrumb from "../../components/breadcrumbComponent.vue";
 import CategoryTable from "./CategoriesTable.vue";
+import AvatarComponent from "../../components/AvatarComponent.vue";
 export default {
     components:{
         breadcrumb,
         CategoryTable,
+        AvatarComponent,
+    },
+data(){
+    return {
+        categories:[],
     }
+},
 
 }
 </script>

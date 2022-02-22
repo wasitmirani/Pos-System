@@ -22948,29 +22948,6 @@ var app = (0,vue__WEBPACK_IMPORTED_MODULE_0__.createApp)({
         document.body.classList.toggle('enlarge-menu');
       });
     } catch (err) {}
-
-    function hideDropdowns(dropdown) {
-      var currentMenu = dropdown.querySelector('.dropdown-menu');
-      var nestedMenus = currentMenu.querySelectorAll('.dropdown-menu');
-
-      if (nestedMenus) {
-        [].forEach.call(nestedMenus, function (menu) {
-          menu.classList.remove('show');
-        });
-      }
-    }
-
-    [].forEach.call(dropdowns, function (dropdown) {
-      var toggle = dropdown.querySelector('[data-bs-toggle="dropdown"]');
-
-      if (toggle) {
-        toggle.addEventListener(events[0], function (e) {
-          toggleDropdown(e, dropdown);
-        });
-      } else {
-        hideDropdowns(dropdown);
-      }
-    });
   }
 });
 app.use(_router__WEBPACK_IMPORTED_MODULE_1__["default"]).mount('#app');
@@ -44246,6 +44223,16 @@ var map = {
 		"./resources/js/bootstrap.js",
 		7
 	],
+	"./components/backend/components/AvatarComponent": [
+		"./resources/js/components/backend/components/AvatarComponent.vue",
+		9,
+		"resources_js_components_backend_components_AvatarComponent_vue"
+	],
+	"./components/backend/components/AvatarComponent.vue": [
+		"./resources/js/components/backend/components/AvatarComponent.vue",
+		9,
+		"resources_js_components_backend_components_AvatarComponent_vue"
+	],
 	"./components/backend/components/breadcrumbComponent": [
 		"./resources/js/components/backend/components/breadcrumbComponent.vue",
 		9,
@@ -44481,7 +44468,7 @@ module.exports = JSON.parse('{"name":"axios","version":"0.21.4","description":"P
 /******/ 		// This function allow to reference async chunks
 /******/ 		__webpack_require__.u = (chunkId) => {
 /******/ 			// return url for filenames not based on template
-/******/ 			if ({"resources_js_components_backend_components_breadcrumbComponent_vue":1,"resources_js_components_backend_pages_builder_profile_profileBuilderComponent_vue":1,"resources_js_components_backend_pages_category_CategoriesComponent_vue":1,"resources_js_components_backend_pages_category_CategoriesTable_vue":1,"resources_js_components_backend_pages_dashboard_HomeComponent_vue":1,"resources_js_components_backend_pages_error_404Component_vue":1,"resources_js_components_welcome_vue":1}[chunkId]) return "js/" + chunkId + ".js";
+/******/ 			if ({"resources_js_components_backend_components_AvatarComponent_vue":1,"resources_js_components_backend_components_breadcrumbComponent_vue":1,"resources_js_components_backend_pages_builder_profile_profileBuilderComponent_vue":1,"resources_js_components_backend_pages_category_CategoriesComponent_vue":1,"resources_js_components_backend_pages_category_CategoriesTable_vue":1,"resources_js_components_backend_pages_dashboard_HomeComponent_vue":1,"resources_js_components_backend_pages_error_404Component_vue":1,"resources_js_components_welcome_vue":1}[chunkId]) return "js/" + chunkId + ".js";
 /******/ 			// return url for filenames based on template
 /******/ 			return undefined;
 /******/ 		};

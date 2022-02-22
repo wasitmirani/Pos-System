@@ -149,7 +149,37 @@
     </div>
 
         <!-- Javascript  -->
-
+        <script>
+            window.primarycolor="#1e204f";
+  // window.appname={!! json_encode(config('app.name'),true)!!};
+       @auth
+       window.user = {!! json_encode(Auth::user(), true) !!};
+         window.permissions = {!! json_encode(Auth::user()->permissions->pluck('name'), true) !!};
+         let roles_permissions = {!! json_encode(Auth::user()->getPermissionsViaRoles()->pluck('name'), true) !!};
+         roles_permissions.map((item)=>{
+            if(permissions.indexOf(item) === -1) {
+              permissions.push(item);
+            }
+         });
+       @else
+           window.user = [];
+           window.permissions = [];
+       @endauth
+       @if(session('login')=="true" || session('login')==true)
+       setTimeout(function() {
+       // toastr['success'](
+       // 'You have successfully logged in to {{config('app.name')}}.',
+       // '👋 Welcome {{Auth::user()->name}}!', {
+       //     closeButton: true,
+       //      tapToDismiss: false
+       // }
+       // );
+       }, 1000);
+       @php
+       session(['login' => '']);
+       @endphp
+       @endif
+  </script>
         <script src="{{asset('assets/plugins/apexcharts/apexcharts.min-1.js')}}"></script>
         <script src="{{asset('assets/pages/analytics-index.init-1.js')}}"></script>
         <script src="{{ asset('js/app.js') }}" defer></script>

@@ -12,7 +12,9 @@
                                             <tbody>
                                             <tr>
                                                 <td>
-                                                    <img src="assets/images/users/user-3.jpg" alt="" class="rounded-circle thumb-sm me-1"> Aaron Poulin
+                                                  <div>
+                                                       <AvatarComponent name="Aaron Pouli" /> Aaron Poulin
+                                                  </div>
                                                 </td>
 
 
@@ -30,8 +32,9 @@
 </template>
 
 <script>
+import AvatarComponent from "../../components/AvatarComponent.vue";
 export default {
-
+    components:{AvatarComponent},
 }
 </script>
 
