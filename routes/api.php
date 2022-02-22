@@ -2,6 +2,7 @@
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\backend\api\category\CategoryController;
 
 /*
 |--------------------------------------------------------------------------
@@ -19,4 +20,4 @@ Route::middleware(['auth:sanctum'])->get('/user', function (Request $request) {
 });
 
 
-Route::resource('category', UserController::class);
+Route::resource('category', CategoryController::class);

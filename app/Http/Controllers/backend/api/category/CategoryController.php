@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\backend\api\category;
 
 use App\Models\Category;
+use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
@@ -21,31 +22,22 @@ class CategoryController extends Controller
 
     public function index(Request $request)
     {
-
         $categories=$this->category->getAllCategories($request);
-
         return response()->json(['categories'=> $categories]);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
+
+
     public function store(Request $request)
     {
-        //
+        $validated = $request->validate([
+            'name' => 'required|unique:categories|max:255',
+        ]);
+        return Category::create([
+            'name'=>$request->name,
+            'slug'=>Str::snake($request->name, '-'),
+        ]);
     }
 
     /**
