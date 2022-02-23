@@ -58,7 +58,7 @@
                         <div class="col-lg-6">
                             <ul class="list-inline">
                                 <li class="list-inline-item">
-                                    <h5 class="mt-0">Here the list of all categories. <span class="badge badge-primary">{{categories.length}}</span></h5>
+                                    <h5 class="mt-0">Here the list of all categories. <span class="badge badge-primary text-dark">{{categories.length}}</span></h5>
                                 </li>
                             </ul>
                         </div><!--end col-->
@@ -76,13 +76,13 @@
                                         <button type="button" class="btn btn-primary btn-sm"><i class="fas fa-filter"></i></button>
                                     </li>
                                     <li class="list-inline-item">
-                                        <button type="button" class="btn btn-primary btn-sm">Add New Category</button>
+                                        <button type="button" class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#modal">Add New Category</button>
                                     </li>
                                 </ul>
                             </div>
                         </div><!--end col-->
                     </div>
-           <div class="row">
+                <div class="row">
                         <div class="col-12">
                             <div class="card">
                                 <div class="card-header">
@@ -119,7 +119,25 @@
                                 </div><!--end card-body-->
                             </div><!--end card-->
                         </div> <!-- end col -->
-        </div><!--end row-->
+            </div><!--end row-->
+
+                   <div class="modal fade" id="modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                                    <div class="modal-dialog modal-dialog-centered" role="document">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h6 class="modal-title m-0" id="exampleModalCenterTitle">Create New Category</h6>
+                                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                            </div><!--end modal-header-->
+                                            <div class="modal-body">
+                                                <CategoryForm></CategoryForm>
+                                            </div><!--end modal-body-->
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn btn-de-danger btn-sm" data-bs-dismiss="modal">Close</button>
+                                                <button type="button" class="btn btn-primary btn-sm">Submit</button>
+                                            </div><!--end modal-footer-->
+                                        </div><!--end modal-content-->
+                                    </div><!--end modal-dialog-->
+                                </div><!--end modal-->
   </div>
 </template>
 
@@ -127,16 +145,25 @@
 import breadcrumb from "../../components/breadcrumbComponent.vue";
 import CategoryTable from "./CategoriesTable.vue";
 import AvatarComponent from "../../components/AvatarComponent.vue";
+import CategoryForm from "./CategoryForm.vue";
 export default {
     components:{
         breadcrumb,
         CategoryTable,
+        CategoryForm,
         AvatarComponent,
     },
 data(){
     return {
         categories:[],
     }
+},
+methods:{
+    getCategories(){
+        axios.get('category').then(response=>{
+            this.categories = response.data.categories;
+        })
+    },
 },
 
 }
