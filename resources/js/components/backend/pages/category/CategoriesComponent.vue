@@ -129,7 +129,13 @@
                                                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                             </div><!--end modal-header-->
                                             <div class="modal-body">
-                                                <CategoryForm></CategoryForm>
+                                                <!--  v-can="'RoleCreate'" -->
+                                                <CategoryForm
+                                                    :edit_mode="edit_mode"
+                                                    :edit_form="edit_data"
+                                                    v-on:created="closePopup($event)"
+                                                    v-on:updated="closePopup($event)"
+                                                ></CategoryForm>
                                             </div><!--end modal-body-->
                                             <div class="modal-footer">
                                                 <button type="button" class="btn btn-de-danger btn-sm" data-bs-dismiss="modal">Close</button>
@@ -156,9 +162,16 @@ export default {
 data(){
     return {
         categories:[],
+        edit_mode:false,
     }
 },
 methods:{
+   closePopup(item) {
+      if (item) {
+        this.getCategories();
+        $("#modal").modal("hide");
+      }
+    },
     getCategories(){
         axios.get('category').then(response=>{
             this.categories = response.data.categories;
