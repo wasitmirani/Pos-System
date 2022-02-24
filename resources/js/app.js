@@ -1,7 +1,8 @@
 require('./bootstrap');
 
 require('alpinejs');
-
+import Swal from 'sweetalert2'
+window.Swal = Swal;
 import { createApp } from 'vue';
 import router from './router'
 const app =createApp({

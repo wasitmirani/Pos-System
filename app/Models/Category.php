@@ -2,15 +2,18 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
+use App\Models\Category;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Category extends Model
 {
     use HasFactory;
-
+    protected $fillable = ['name', 'slug'];
     public function getAllCategories($request){
-        $q=$request->query;
+
+        $q=!empty(request('query')) ? request('query') : "";
+
         $per_page=!empty($request->per_page) ?  $request->per_page  : env('PER_PAGE');
         $categories=Category::latest()
                     ->where('name','LIKE','%'.$q.'%');
@@ -18,7 +21,7 @@ class Category extends Model
           $categories=$categories->paginate((int)$per_page);
        else
             $categories=$categories->get();
-            
-        $categories;
+
+       return $categories;
     }
 }
