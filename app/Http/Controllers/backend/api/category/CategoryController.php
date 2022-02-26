@@ -71,6 +71,13 @@ class CategoryController extends Controller
      */
     public function update(Request $request, $id)
     {
+        $validated = $request->validate([
+            'name' => 'required|unique:categories|max:255',
+        ]);
+        return Category::where('id',$id)->update([
+            'name'=>$request->name,
+            'slug'=>Str::snake($request->name, '-'),
+        ]);
         //
     }
 

@@ -3703,6 +3703,13 @@
     "webpackbar" "^5.0.0-3"
     "yargs" "^17.2.1"
 
+"laravel-vue-pagination@^3.0.0":
+  "integrity" "sha512-kskpo+1Ciz1uo1VWjgnwdeBv6M6sF3Hus/VnwFvPOUSpfsR/WVaE+nCN2QOE0FBcV5e32o/Nel5397Q8pgWQQg=="
+  "resolved" "https://registry.npmjs.org/laravel-vue-pagination/-/laravel-vue-pagination-3.0.0.tgz"
+  "version" "3.0.0"
+  dependencies:
+    "vue" "^3.2.25"
+
 "lilconfig@^2.0.3", "lilconfig@^2.0.4":
   "integrity" "sha512-bfTIN7lEsiooCocSISTWXkiWJkRqtL9wYtYy+8EK3Y41qh3mpwPU0ycTOgjdY9ErwXCc8QyrQp82bdL0Xkm9yA=="
   "resolved" "https://registry.npmjs.org/lilconfig/-/lilconfig-2.0.4.tgz"
@@ -5674,7 +5681,7 @@
     "hash-sum" "^1.0.2"
     "loader-utils" "^1.0.2"
 
-"vue@^3.0.0", "vue@^3.2.29", "vue@3.2.31":
+"vue@^3.0.0", "vue@^3.2.25", "vue@^3.2.29", "vue@3.2.31":
   "integrity" "sha512-odT3W2tcffTiQCy57nOT93INw1auq5lYLLYtWpPYQQYQOOdHiqFct9Xhna6GJ+pJQaF67yZABraH47oywkJgFw=="
   "resolved" "https://registry.npmjs.org/vue/-/vue-3.2.31.tgz"
   "version" "3.2.31"

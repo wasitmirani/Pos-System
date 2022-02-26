@@ -11,6 +11,7 @@
     },
     "dependencies": {
         "jquery": "^3.6.0",
+        "laravel-vue-pagination": "^3.0.0",
         "sweetalert2": "^11.4.4",
         "vue": "^3.2.29",
         "vue-content-placeholders": "^0.2.1",

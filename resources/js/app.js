@@ -5,8 +5,12 @@ import Swal from 'sweetalert2'
 window.Swal = Swal;
 import { createApp } from 'vue';
 import router from './router'
-const app =createApp({
+import LaravelVuePagination from 'laravel-vue-pagination';
 
+const app =createApp({
+    methods: {
+        
+    },
     mounted(){
 
         try {
@@ -18,5 +22,6 @@ const app =createApp({
 
     }
 });
+app.component("Pagination", LaravelVuePagination);
 
 app.use(router).mount('#app');

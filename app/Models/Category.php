@@ -17,7 +17,8 @@ class Category extends Model
         $per_page=!empty($request->per_page) ?  $request->per_page  : env('PER_PAGE');
         $categories=Category::latest()
                     ->where('name','LIKE','%'.$q.'%');
-       if(!$request->paginate==false)
+       if(empty($request->paginate))
+    //    if(!$request->paginate==false)
           $categories=$categories->paginate((int)$per_page);
        else
             $categories=$categories->get();

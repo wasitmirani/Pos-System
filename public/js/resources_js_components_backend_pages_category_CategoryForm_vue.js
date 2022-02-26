@@ -12,7 +12,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
-  props: ['edit_mode'],
+  props: ['edit_mode', 'editForm'],
   emits: ['created', 'updated'],
   data: function data() {
     return {
@@ -20,7 +20,38 @@ __webpack_require__.r(__webpack_exports__);
       errors: []
     };
   },
+  watch: {
+    editForm: function editForm(collection) {
+      //   if (collection == null) {
+      //     return this.rest_form();
+      //   }
+      if (collection) {
+        this.errors = [];
+        this.category = collection;
+      } //   } else {
+      //     this.rest_form();
+      //   }
+
+    }
+  },
   methods: {
+    toastAlert: function toastAlert(icon, title) {
+      var Toast = Swal.mixin({
+        toast: true,
+        position: 'top-end',
+        showConfirmButton: false,
+        timer: 3000,
+        timerProgressBar: true,
+        didOpen: function didOpen(toast) {
+          toast.addEventListener('mouseenter', Swal.stopTimer);
+          toast.addEventListener('mouseleave', Swal.resumeTimer);
+        }
+      });
+      Toast.fire({
+        icon: icon,
+        title: title
+      });
+    },
     onSubmit: function onSubmit() {
       var data = this.category; // this.$emit('created')
 
@@ -46,8 +77,11 @@ __webpack_require__.r(__webpack_exports__);
     updateItem: function updateItem(data) {
       var _this2 = this;
 
-      axios.put("/category", data).then(function (res) {
+      var url = "/category/" + this.category.id;
+      axios.put(url, data).then(function (res) {
         _this2.$emit('updated');
+
+        _this2.toastAlert('success', "Category Updated Successfully");
       })["catch"](function (err) {
         _this2.errors = err.response.data.errors;
       });
@@ -93,19 +127,31 @@ var _hoisted_5 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementV
 /* HOISTED */
 );
 
-var _hoisted_6 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
+var _hoisted_6 = {
   "class": "float-right-buttons"
-}, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
+};
+
+var _hoisted_7 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
   type: "button",
   "class": "btn btn-de-danger btn-sm",
+  style: {
+    "margin-right": "10px"
+  },
   "data-bs-dismiss": "modal"
-}, "Close"), /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
-  type: "submit",
-  "class": "btn btn-primary btn-sm"
-}, "Submit")], -1
+}, "Close", -1
 /* HOISTED */
 );
 
+var _hoisted_8 = {
+  key: 0,
+  type: "submit",
+  "class": "btn btn-primary btn-sm"
+};
+var _hoisted_9 = {
+  key: 1,
+  type: "submit",
+  "class": "ml-2 btn btn-success btn-sm"
+};
 function render(_ctx, _cache, $props, $setup, $data, $options) {
   return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("form", {
     onSubmit: _cache[2] || (_cache[2] = (0,vue__WEBPACK_IMPORTED_MODULE_0__.withModifiers)(function () {
@@ -133,7 +179,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     })
   }, null, 512
   /* NEED_PATCH */
-  ), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelText, $data.category.description]])]), _hoisted_5, _hoisted_6], 32
+  ), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelText, $data.category.description]])]), _hoisted_5, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_6, [_hoisted_7, !$props.edit_mode ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("button", _hoisted_8, "Submit")) : ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("button", _hoisted_9, "Update"))])], 32
   /* HYDRATE_EVENTS */
   )]);
 }

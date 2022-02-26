@@ -186,6 +186,7 @@
 
         <!-- App js -->
         <script src="{{asset('assets/js/app-1.js')}}"></script>
+        {{-- <script src="{{asset('assets/pages/toast.init.js')}}"></script> --}}
 
     </body>
     <!--end body-->

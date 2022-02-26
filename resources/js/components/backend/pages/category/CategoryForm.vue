@@ -11,8 +11,9 @@
       </div>
       <hr>
       <div class="float-right-buttons">
-           <button type="button" class="btn btn-de-danger btn-sm" data-bs-dismiss="modal">Close</button>
-      <button type="submit" class="btn btn-primary btn-sm">Submit</button>
+        <button type="button" class="btn btn-de-danger btn-sm"  style="margin-right: 10px;" data-bs-dismiss="modal">Close</button>
+      <button type="submit" class="btn btn-primary btn-sm" v-if="!edit_mode">Submit</button>
+      <button type="submit" class="ml-2 btn btn-success btn-sm" v-else>Update</button>
       </div>
 
        </form>
@@ -20,7 +21,7 @@
 </template>
 <script>
    export default {
-       props:['edit_mode'],
+       props:['edit_mode','editForm'],
        emits: ['created','updated'],
 
        data(){
@@ -29,7 +30,39 @@
                errors:[],
            }
        },
+       watch: {
+    editForm(collection) {
+    //   if (collection == null) {
+    //     return this.rest_form();
+    //   }
+      if (collection) {
+        this.errors = [];
+        this.category = collection;
+      }
+    //   } else {
+    //     this.rest_form();
+    //   }
+    }
+    },
        methods:{
+           toastAlert(icon,title) {
+            const Toast = Swal.mixin({
+                toast: true,
+                position: 'top-end',
+                showConfirmButton: false,
+                timer: 3000,
+                timerProgressBar: true,
+                didOpen: (toast) => {
+                  toast.addEventListener('mouseenter', Swal.stopTimer)
+                  toast.addEventListener('mouseleave', Swal.resumeTimer)
+                }
+              })
+
+              Toast.fire({
+                icon: icon,
+                title: title,
+              })
+        },
            onSubmit(){
                let data = this.category;
                 // this.$emit('created')
@@ -51,9 +84,11 @@
                   });
            },
            updateItem(data){
-              axios.put("/category",data).then((res)=>{
-
+              const url="/category/"+this.category.id;
+              axios.put(url,data).then((res)=>{
                       this.$emit('updated');
+                    this.toastAlert('success',"Category Updated Successfully");
+
                   }).catch((err)=>{
                         this.errors = err.response.data.errors;
 
