@@ -22983,8 +22983,8 @@ window.$ = window.jQuery = __webpack_require__(/*! jquery */ "./node_modules/jqu
  */
 
 window.axios = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
-window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest'; // window.axios.defaults.headers.common['Authorization'] = `Bearer ` + user.token;
-
+window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
+window.axios.defaults.headers.common['Authorization'] = "Bearer " + user.token;
 window.axios.defaults.baseURL = window.location.origin + "/api/";
 /**
  * Echo exposes an expressive API for subscribing to channels and listening
