@@ -32,12 +32,16 @@
        },
        watch: {
     editForm(collection) {
-    //   if (collection == null) {
-    //     return this.rest_form();
-    //   }
+      if (collection == null) {
+       this.category={};
+       return true;
+      }
       if (collection) {
         this.errors = [];
         this.category = collection;
+      }
+      else {
+          this.category ={};
       }
     //   } else {
     //     this.rest_form();
@@ -52,10 +56,6 @@
                 showConfirmButton: false,
                 timer: 3000,
                 timerProgressBar: true,
-                didOpen: (toast) => {
-                  toast.addEventListener('mouseenter', Swal.stopTimer)
-                  toast.addEventListener('mouseleave', Swal.resumeTimer)
-                }
               })
 
               Toast.fire({

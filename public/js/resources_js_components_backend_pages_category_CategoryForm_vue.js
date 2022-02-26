@@ -22,12 +22,16 @@ __webpack_require__.r(__webpack_exports__);
   },
   watch: {
     editForm: function editForm(collection) {
-      //   if (collection == null) {
-      //     return this.rest_form();
-      //   }
+      if (collection == null) {
+        this.category = {};
+        return true;
+      }
+
       if (collection) {
         this.errors = [];
         this.category = collection;
+      } else {
+        this.category = {};
       } //   } else {
       //     this.rest_form();
       //   }
@@ -41,11 +45,7 @@ __webpack_require__.r(__webpack_exports__);
         position: 'top-end',
         showConfirmButton: false,
         timer: 3000,
-        timerProgressBar: true,
-        didOpen: function didOpen(toast) {
-          toast.addEventListener('mouseenter', Swal.stopTimer);
-          toast.addEventListener('mouseleave', Swal.resumeTimer);
-        }
+        timerProgressBar: true
       });
       Toast.fire({
         icon: icon,

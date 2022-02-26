@@ -1,8 +1,8 @@
 <template>
    <div>
       <breadcrumb active_name="Categories"/>
-      <div class="row" v-if="categories.data">
-         <div class="col-lg-4" v-for="item in categories.data.slice(0, 3)" :key="item.id">
+      <div class="row" v-if="latest_categories">
+         <div class="col-lg-4" v-for="item in latest_categories" :key="item.id">
             <div class="card">
                <div class="card-body p-0">
                   <div class="media p-3  align-items-center">
@@ -12,18 +12,13 @@
                         <p class="mb-0 text-muted">@{{item.slug}}</p>
                      </div>
                      <div class="action-btn">
-                        <a href="#"><i class="las la-pen text-secondary font-16"></i></a>
-                        <a href="#"><i class="las la-trash-alt text-secondary font-16"></i></a>
+                        <a role="button" @click="edited(item)"><i class="las la-pen text-secondary font-16"></i></a>
+                        <a role="button" @click="deleted($event)"><i class="las la-trash-alt text-secondary font-16"></i></a>
                      </div>
                   </div>
                </div>
-               <!--end card-body-->
             </div>
-            <!--end card-->
          </div>
-         <!--end col-->
-
-         <!--end col-->
       </div>
       <div class="row">
          <div class="col-lg-6">
@@ -33,20 +28,19 @@
                </li>
             </ul>
          </div>
-         <!--end col-->
          <div class="col-lg-6 text-end">
             <div class="text-end">
                <ul class="list-inline">
                   <li class="list-inline-item">
-                      <SearchInput  placeholder="Search By Name" :apiurl="`/category?page=${this.page_num}`" @query="isQuery($event)" @loading="isLoading($event)" @reload="getCategories()" @filterdata="filterData($event)" :query_input="query"/>
+                     <SearchInput  placeholder="Search By Name" :apiurl="`/category?page=${this.page_num}`" @query="isQuery($event)" @loading="isLoading($event)" @reload="getCategories()" @filterdata="filterData($event)" :query_input="query"/>
                   </li>
-                  <li class="list-inline-item">
+                  <!-- <li class="list-inline-item">
                      <button type="button" class="btn btn-primary btn-sm"><i class="fas fa-filter"></i></button>
-                  </li>
+                     </li> -->
                   <li class="list-inline-item">
                      <button type="button" class="btn btn-primary btn-sm" @click="openModal">Add New Category</button>
                   </li>
-                   <li class="list-inline-item">
+                  <li class="list-inline-item">
                      <button type="button" class="btn btn-warning btn-sm" @click="getCategories"><i class="mdi mdi-reload"></i></button>
                   </li>
                </ul>
@@ -72,8 +66,7 @@
                      <!-- <strong>Loading...</strong> -->
                      <div class="spinner-border text-dark" role="status"></div>
                   </div>
-                  <CategoryTable :categories="categories" @edited="edited($event)" :getCategories="getCategories" v-else />
-
+                  <CategoryTable :categories="categories" @deleted="deleted($event)" @edited="edited($event)" :getCategories="getCategories" v-else />
                   <!--end row-->
                </div>
                <!--end card-body-->
@@ -94,7 +87,6 @@
                <div class="modal-body">
                   <CategoryForm :edit_mode="edit_mode" :editForm="edit_data" @created="closePopup()" @updated="closePopup()"></CategoryForm>
                </div>
-
             </div>
             <!--end modal-content-->
          </div>
@@ -120,6 +112,7 @@
    data(){
        return {
            categories:[],
+           latest_categories:[],
            edit_mode:false,
            loading:false,
            query:"",
@@ -127,19 +120,23 @@
        }
    },
    methods:{
+       resetForm(){
+              this.edit_mode = false;
+              this.edit_data = {};
+
+       },
        edited(item){
+           this.resetForm();
             this.edit_mode = true;
            this.edit_data = item;
            $("#modal").modal("show");
        },
        openModal(){
-              this.edit_mode = false;
-             this.edit_data = null;
+          this.resetForm();
             $("#modal").modal("show");
        },
       closePopup() {
-           this.edit_mode = false;
-           this.edit_data = null;
+         this.resetForm();
            this.getCategories();
            $("#modal").modal("hide");
        },
@@ -147,15 +144,14 @@
         this.categories = data.categories;
         console.log(this.loading);
        },
-       isLoading(value) {
 
+       isLoading(value) {
         this.loading = value;
       //   this.getUriWithParam();
         },
         isQuery(query){
-
          (this.query = query);
-      this.getUriWithParam();
+          this.getUriWithParam();
         },
          getUriWithParam(baseUrl, params) {
          let queryParams = new URLSearchParams(window.location.search);
@@ -169,20 +165,42 @@
         this.loading=true;
         const url=`category?page=${this.page_num}&query=${this.query}`;
         await axios.get(url).then(response=>{
-
                 this.categories = response.data.categories;
-                  this.loading=false;
-                      this.getUriWithParam();
+                this.latest_categories=response.data.latest_categories;
+                this.loading=false;
+                this.getUriWithParam();
+            })
+       },
+       deleted(item){
+           Swal.fire({
+            title: 'Are you sure?',
+            text: "You won't be able to revert this!",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Yes, delete it!'
+            }).then((result) => {
+            if (result.isConfirmed) {
+                axios.delete('category/'+item.id).then((response)=>{
+                         Swal.fire(
+                        'Deleted!',
+                        'Your file has been deleted.',
+                        'success'
+                        )
+                    this.getCategories();
+                });
+
+            }
             })
        },
 
    },
     mounted() {
 
-           let queryParams = new URLSearchParams(window.location.search);
-
+          let queryParams = new URLSearchParams(window.location.search);
           this.page_num= queryParams.get('page');
-           const q= queryParams.get('query');
+          const q= queryParams.get('query');
 
            if(q=='null' || q==undefined || q=="null"){
                this.query='';
@@ -195,5 +213,4 @@
 
    }
 </script>
-<style>
-</style>
+<style></style>

@@ -9,7 +9,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 class Category extends Model
 {
     use HasFactory;
-    protected $fillable = ['name', 'slug'];
+   protected $guarded = [];
     public function getAllCategories($request){
 
         $q=!empty(request('query')) ? request('query') : "";

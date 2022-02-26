@@ -22,8 +22,9 @@ class CategoryController extends Controller
 
     public function index(Request $request)
     {
+        $latest_categories=$this->category->latest()->take(3)->get();
         $categories=$this->category->getAllCategories($request);
-        return response()->json(['categories'=> $categories]);
+        return response()->json(['categories'=> $categories,'latest_categories'=>$latest_categories]);
     }
 
 
@@ -37,6 +38,7 @@ class CategoryController extends Controller
         return Category::create([
             'name'=>$request->name,
             'slug'=>Str::snake($request->name, '-'),
+            'description'=>$request->description,
         ]);
     }
 
@@ -77,6 +79,7 @@ class CategoryController extends Controller
         return Category::where('id',$id)->update([
             'name'=>$request->name,
             'slug'=>Str::snake($request->name, '-'),
+            'description'=>$request->description,
         ]);
         //
     }
@@ -89,6 +92,6 @@ class CategoryController extends Controller
      */
     public function destroy($id)
     {
-        //
+        return  Category::destroy($id);
     }
 }
