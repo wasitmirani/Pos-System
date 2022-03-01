@@ -35,7 +35,7 @@ class CategoryController extends Controller
         $validated = $request->validate([
             'name' => 'required|unique:categories|max:255',
         ]);
-        return Category::create([
+        return $this->category->create([
             'name'=>$request->name,
             'slug'=>Str::snake($request->name, '-'),
             'description'=>$request->description,
@@ -74,9 +74,9 @@ class CategoryController extends Controller
     public function update(Request $request, $id)
     {
         $validated = $request->validate([
-            'name' => 'required|unique:categories|max:255',
+            'name' => 'required|unique:categories,name,'.$id,
         ]);
-        return Category::where('id',$id)->update([
+        return $this->category->where('id',$id)->update([
             'name'=>$request->name,
             'slug'=>Str::snake($request->name, '-'),
             'description'=>$request->description,
@@ -92,6 +92,6 @@ class CategoryController extends Controller
      */
     public function destroy($id)
     {
-        return  Category::destroy($id);
+        return  $this->category->destroy($id);
     }
 }

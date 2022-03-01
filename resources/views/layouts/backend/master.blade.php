@@ -25,6 +25,7 @@
          <link href="{{asset('assets/css/app.min-1.css')}}" rel="stylesheet" type="text/css">
          @endif
 
+        <link href=""{{asset('assets/plugins/uppy/uppy.min.css')}}" rel="stylesheet" type="text/css" />
     </head>
 
     <body id="body" class="dark-sidebar">
@@ -180,8 +181,11 @@
        @endphp
        @endif
   </script>
+
+
         <script src="{{asset('assets/plugins/apexcharts/apexcharts.min-1.js')}}"></script>
         <script src="{{asset('assets/pages/analytics-index.init-1.js')}}"></script>
+        <script src="{{asset('assets/pages/file-upload.init.js')}}"></script>
         <script src="{{ asset('js/app.js') }}" defer></script>
 
         <!-- App js -->

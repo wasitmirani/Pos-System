@@ -10,10 +10,10 @@
                </tr>
             </thead>
             <tbody>
-                <tr v-if="categories.length<1">
+                <tr v-if="products.length<1">
                     <AlertComponent message="Category has been not found" title="Not Found"></AlertComponent>
                 </tr>
-               <tr v-for="item in categories.data" :key="item.id" v-else>
+               <tr v-for="item in products.data" :key="item.id" v-else>
                   <td>
                      <div class="media">
                         <AvatarComponent :name="item.name" />
@@ -35,14 +35,14 @@
       </div>
       <div class="row">
          <div class="col-auto ">
-            <TableFooterComponent :table="categories"/>
+            <TableFooterComponent :table="products"/>
          </div>
       </div>
       <hr>
       <div class="row">
          <div class="col-auto">
             <nav aria-label="...">
-               <Pagination :data="categories" @pagination-change-page="getCategories" />
+               <Pagination :data="products" @pagination-change-page="getProducts" />
             </nav>
          </div>
       </div>
@@ -53,7 +53,7 @@
    import TableFooterComponent from "../../components/TableFooterComponent.vue";
    import AlertComponent from "../../components/AlertComponent.vue";
    export default {
-       props:['categories','getCategories'],
+       props:['products','getProducts'],
        emits: ['edited','deleted'],
        components:{AvatarComponent,TableFooterComponent,AlertComponent},
        methods:{

@@ -30,10 +30,10 @@ const routes = [
         path: "/categories", component: () => setComponent("category/Categories"), name: "Categories",
         meta: { permissions: "categories-view" }
     },
-    // {
-    //     path: "/container/receives", component: () => setComponent("receive/Receives"), name: "Users",
-    //     meta: { permissions: "receives-view" }
-    // },
+    {
+        path: "/products", component: () => setComponent("product/Products"), name: "Users",
+        meta: { permissions: "products-view" }
+    },
 
 
 

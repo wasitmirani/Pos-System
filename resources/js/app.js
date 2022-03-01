@@ -6,11 +6,9 @@ window.Swal = Swal;
 import { createApp } from 'vue';
 import router from './router'
 import LaravelVuePagination from 'laravel-vue-pagination';
-
+import Multiselect from 'vue-multiselect'
 const app =createApp({
-    methods: {
-        
-    },
+    components:{Multiselect},
     mounted(){
 
         try {
