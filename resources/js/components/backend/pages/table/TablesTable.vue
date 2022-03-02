@@ -10,10 +10,10 @@
                </tr>
             </thead>
             <tbody>
-                <tr v-if="categories.length<1">
+                <tr v-if="tables.length<1">
                     <AlertComponent message="Category has been not found" title="Not Found"></AlertComponent>
                 </tr>
-               <tr v-for="item in categories.data" :key="item.id" v-else>
+               <tr v-for="item in tables.data" :key="item.id" v-else>
                   <td>
                      <div class="media">
                         <AvatarComponent :name="item.name" />
@@ -23,7 +23,7 @@
                         </div>
                      </div>
                   </td>
-                    <td><p class="text-muted mt-4 mb-1">{{item.description != null ?  item.description.slice(0, 35) + (item.description.length > 35 ? "..." : "") : 'N/A'}}</p></td>
+                  <td><p class="text-muted mt-4 mb-1">{{item.description != null ?  item.description.slice(0, 35) + (item.description.length > 35 ? "..." : "") : 'N/A'}}</p></td>
                   <td>
                      <a role="button" @click="edited(item)"><i class="las la-pen text-primary font-16"></i></a>
                      <a role="button" @click="deleted(item)"><i class="las la-trash-alt text-danger font-16"></i></a>
@@ -35,14 +35,14 @@
       </div>
       <div class="row">
          <div class="col-auto ">
-            <TableFooterComponent :table="categories"/>
+            <TableFooterComponent :table="tables"/>
          </div>
       </div>
       <hr>
       <div class="row">
          <div class="col-auto">
             <nav aria-label="...">
-               <Pagination :data="categories" @pagination-change-page="getCategories" />
+               <Pagination :data="tables" @pagination-change-page="getTables" />
             </nav>
          </div>
       </div>
@@ -53,7 +53,7 @@
    import TableFooterComponent from "../../components/TableFooterComponent.vue";
    import AlertComponent from "../../components/AlertComponent.vue";
    export default {
-       props:['categories','getCategories'],
+       props:['tables','getTables'],
        emits: ['edited','deleted'],
        components:{AvatarComponent,TableFooterComponent,AlertComponent},
        methods:{

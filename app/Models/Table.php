@@ -2,27 +2,26 @@
 
 namespace App\Models;
 
-use App\Models\Category;
-use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Model;
 
-class Category extends Model
+class Table extends Model
 {
     use HasFactory;
-   protected $guarded = [];
-    public function getAllCategories($request){
+    protected $guarded = [];
+    public function getAllTables($request){
 
         $q=!empty(request('query')) ? request('query') : "";
 
         $per_page=!empty($request->per_page) ?  $request->per_page  : env('PER_PAGE');
-        $categories=Category::latest()
+        $tables=Table::latest()
                     ->where('name','LIKE','%'.$q.'%');
        if(!isset($request->paginate))
     //    if(!$request->paginate==false)
-          $categories=$categories->paginate((int)$per_page);
+          $tables=$tables->paginate((int)$per_page);
        else
-            $categories=$categories->get();
+            $tables=$tables->get();
 
-       return $categories;
+       return $tables;
     }
 }

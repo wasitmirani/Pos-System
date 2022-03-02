@@ -19,14 +19,14 @@
                 <a class="nav-link dropdown-toggle arrow-none nav-icon" data-bs-toggle="dropdown" href="#" role="button" aria-haspopup="false" aria-expanded="false">
                 <img src="{{asset('assets/images/flags/us_flag-1.jpg')}}" alt="" class="thumb-xxs rounded">
             </a>
-                <div class="dropdown-menu">
+                {{-- <div class="dropdown-menu">
                     <a class="dropdown-item" href="#"><img src="assets/images/flags/us_flag-1.jpg" alt="" height="15" class="me-2">English</a>
                     <a class="dropdown-item" href="#"><img src="assets/images/flags/spain_flag-1.jpg" alt="" height="15" class="me-2">Spanish</a>
                     <a class="dropdown-item" href="#"><img src="assets/images/flags/germany_flag-1.jpg" alt="" height="15" class="me-2">German</a>
                     <a class="dropdown-item" href="#"><img src="assets/images/flags/french_flag-1.jpg" alt="" height="15" class="me-2">French</a>
-                </div>
+                </div> --}}
             </li><!--end topbar-language-->
-
+{{--
             <li class="dropdown notification-list">
                 <a class="nav-link dropdown-toggle arrow-none nav-icon" data-bs-toggle="dropdown" href="#" role="button" aria-haspopup="false" aria-expanded="false">
                     <i class="ti ti-mail"></i>
@@ -108,9 +108,9 @@
                         View all <i class="fi-arrow-right"></i>
                     </a>
                 </div>
-            </li>
+            </li> --}}
 
-            <li class="dropdown notification-list">
+            {{-- <li class="dropdown notification-list">
                 <a class="nav-link dropdown-toggle arrow-none nav-icon" data-bs-toggle="dropdown" href="#" role="button" aria-haspopup="false" aria-expanded="false">
                     <i class="ti ti-bell"></i>
                     <span class="alert-badge"></span>
@@ -192,15 +192,16 @@
                         View all <i class="fi-arrow-right"></i>
                     </a>
                 </div>
-            </li>
+            </li> --}}
 
             <li class="dropdown">
                 <a class="nav-link dropdown-toggle nav-user" data-bs-toggle="dropdown" href="#" role="button" aria-haspopup="false" aria-expanded="false">
                     <div class="d-flex align-items-center">
-                        <img src="{{asset('assets/images/users/user-4-1.jpg')}}" alt="profile-user" class="rounded-circle me-2 thumb-sm">
+                        <avatar-component class="rounded-circle me-2 thumb-sm"  name="{{auth()->user()->name}}" />
+                        {{-- <img src="{{asset('assets/images/users/user-4-1.jpg')}}" alt="profile-user" > --}}
                         <div>
                             <small class="d-none d-md-block font-11">Admin</small>
-                            <span class="d-none d-md-block fw-semibold font-12">Maria Gibson <i class="mdi mdi-chevron-down"></i></span>
+                            <span class="d-none d-md-block fw-semibold font-12">{{auth()->user()->name}} <i class="mdi mdi-chevron-down"></i></span>
                         </div>
                     </div>
                 </a>
@@ -211,11 +212,11 @@
                     <a class="dropdown-item" href="#"><i class="ti ti-power font-16 me-1 align-text-bottom"></i> Logout</a>
                 </div>
             </li><!--end topbar-profile-->
-            <li class="notification-list">
+            {{-- <li class="notification-list">
                 <a class="nav-link arrow-none nav-icon offcanvas-btn" href="#" data-bs-toggle="offcanvas" data-bs-target="#Appearance" role="button" aria-controls="Rightbar">
                     <i class="ti ti-settings ti-spin"></i>
                 </a>
-            </li>
+            </li> --}}
         </ul><!--end topbar-nav-->
 
         <ul class="list-unstyled topbar-nav mb-0">

@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\backend\api\product;
 
 use App\Models\Product;
+use App\Models\Category;
+use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
@@ -15,21 +17,16 @@ class ProductController extends Controller
     }
     public function index(Request $request)
     {
+        $latest_products=$this->product->latest()->take(3)->get();
+        $category=new Category();
+        $req=(object)['paginate'=>false];
+        $categories=$category->getAllCategories($req);
         $products=$this->product->getProducts($request);
 
-        return response()->json(['products'=>$products]);
+        return response()->json(['products'=>$products,'categories'=>$categories,'latest_products'=>$latest_products]);
         //
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
 
     /**
      * Store a newly created resource in storage.
@@ -39,30 +36,20 @@ class ProductController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validated = $request->validate([
+            'name' => 'required|unique:products|max:255',]);
+
+        return $this->product->create([
+            'name'=>$request->name,
+            'price'=>$request->price,
+            'description'=>$request->description,
+            'category_id'=>$request->category_id,
+            'thumbnail'=>'ww',
+            'slug'=>Str::snake($request->name, '-'),
+        ]);
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
-    }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
-    }
 
     /**
      * Update the specified resource in storage.
@@ -74,6 +61,17 @@ class ProductController extends Controller
     public function update(Request $request, $id)
     {
         //
+        $validated = $request->validate([
+            'name' => 'required|unique:products,name,'.$id,
+        ]);
+        return $this->product->where('id',$id)->update([
+            'name'=>$request->name,
+            'price'=>$request->price,
+            'description'=>$request->description,
+            'category_id'=>$request->category_id,
+            'thumbnail'=>'ww',
+            'slug'=>Str::snake($request->name, '-'),
+        ]);
     }
 
     /**
@@ -85,5 +83,6 @@ class ProductController extends Controller
     public function destroy($id)
     {
         //
+        return  $this->product->destroy($id);
     }
 }

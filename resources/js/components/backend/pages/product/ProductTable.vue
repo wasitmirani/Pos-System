@@ -5,6 +5,8 @@
             <thead class="thead-light">
                <tr>
                   <th>Name</th>
+                  <th>Price</th>
+                   <th>Category</th>
                   <th>Description</th>
                   <th>Action</th>
                </tr>
@@ -23,7 +25,9 @@
                         </div>
                      </div>
                   </td>
-                  <td><p class="text-muted mt-4 mb-1">{{item.description.slice(0, 35) + (item.description.length > 35 ? "..." : "")}}</p></td>
+                  <td>{{item.price}}</td>
+                  <td>{{item.category.name}}</td>
+                   <td><p class="text-muted mt-4 mb-1">{{item.description != null ?  item.description.slice(0, 35) + (item.description.length > 35 ? "..." : "") : 'N/A'}}</p></td>
                   <td>
                      <a role="button" @click="edited(item)"><i class="las la-pen text-primary font-16"></i></a>
                      <a role="button" @click="deleted(item)"><i class="las la-trash-alt text-danger font-16"></i></a>

@@ -31,8 +31,12 @@ const routes = [
         meta: { permissions: "categories-view" }
     },
     {
-        path: "/products", component: () => setComponent("product/Products"), name: "Users",
+        path: "/products", component: () => setComponent("product/Products"), name: "Products",
         meta: { permissions: "products-view" }
+    },
+    {
+        path: "/tables", component: () => setComponent("table/Tables"), name: "Users",
+        meta: { permissions: "tables-view" }
     },
 
 

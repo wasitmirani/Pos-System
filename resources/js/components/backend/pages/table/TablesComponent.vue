@@ -1,8 +1,8 @@
 <template>
    <div>
-      <breadcrumb active_name="Categories"/>
-      <div class="row" v-if="latest_categories">
-         <div class="col-lg-4" v-for="item in latest_categories" :key="item.id">
+      <breadcrumb active_name="Tables"/>
+      <div class="row" v-if="latest_tables">
+         <div class="col-lg-4" v-for="item in latest_tables" :key="item.id">
             <div class="card">
                <div class="card-body p-0">
                   <div class="media p-3  align-items-center">
@@ -24,7 +24,7 @@
          <div class="col-lg-6">
             <ul class="list-inline">
                <li class="list-inline-item">
-                  <h5 class="mt-0">Showing {{categories.current_page}} to {{categories.per_page}} of {{categories.total}} entries </h5>
+                  <h5 class="mt-0">Showing {{tables.current_page}} to {{tables.per_page}} of {{tables.total}} entries </h5>
                </li>
             </ul>
          </div>
@@ -32,16 +32,16 @@
             <div class="text-end">
                <ul class="list-inline">
                   <li class="list-inline-item">
-                     <search-input  placeholder="Search By Name" :apiurl="`/category?page=${this.page_num}`" @query="isQuery($event)" @loading="isLoading($event)" @reload="getCategories()" @filterdata="filterData($event)" :query_input="query"/>
+                     <SearchInput  placeholder="Search By Name" :apiurl="`/table?page=${this.page_num}`" @query="isQuery($event)" @loading="isLoading($event)" @reload="getTables()" @filterdata="filterData($event)" :query_input="query"/>
                   </li>
                   <!-- <li class="list-inline-item">
                      <button type="button" class="btn btn-primary btn-sm"><i class="fas fa-filter"></i></button>
                      </li> -->
                   <li class="list-inline-item">
-                     <button type="button" class="btn btn-primary btn-sm" @click="openModal">Add New Category</button>
+                     <button type="button" class="btn btn-primary btn-sm" @click="openModal">Add New Table</button>
                   </li>
                   <li class="list-inline-item">
-                     <button type="button" class="btn btn-warning btn-sm" @click="getCategories"><i class="mdi mdi-reload"></i></button>
+                     <button type="button" class="btn btn-warning btn-sm" @click="getTables"><i class="mdi mdi-reload"></i></button>
                   </li>
                </ul>
             </div>
@@ -54,7 +54,7 @@
                <div class="card-header">
                   <div class="row align-items-center">
                      <div class="col">
-                        <h4 class="card-title">Here the list of all categories</h4>
+                        <h4 class="card-title">Here the list of all tables</h4>
                      </div>
                      <!--end col-->
                   </div>
@@ -66,7 +66,7 @@
                      <!-- <strong>Loading...</strong> -->
                      <div class="spinner-border text-dark" role="status"></div>
                   </div>
-                  <category-table :categories="categories" @deleted="deleted($event)" @edited="edited($event)" :getCategories="getCategories" v-else />
+                  <tables-table :tables="tables" @deleted="deleted($event)" @edited="edited($event)" :getTables="getTables" v-else />
                   <!--end row-->
                </div>
                <!--end card-body-->
@@ -80,12 +80,12 @@
          <div class="modal-dialog modal-dialog-centered" role="document">
             <div class="modal-content">
                <div class="modal-header">
-                  <h6 class="modal-title m-0" id="exampleModalCenterTitle">{{ edit_mode ? 'Update  Category' : 'Create New Category'  }} </h6>
+                  <h6 class="modal-title m-0" id="exampleModalCenterTitle">{{ edit_mode ? 'Update  Table' : 'Create New Table'  }} </h6>
                   <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                </div>
                <!--end modal-header-->
                <div class="modal-body">
-                  <category-form :edit_mode="edit_mode" :editForm="edit_data" @created="closePopup()" @updated="closePopup()"/>
+                  <table-form :edit_mode="edit_mode" :editForm="edit_data" @created="closePopup()" @updated="closePopup()"/>
                </div>
             </div>
             <!--end modal-content-->
@@ -97,22 +97,22 @@
 </template>
 <script>
    import breadcrumb from "../../components/breadcrumbComponent.vue";
-   import CategoryTable from "./CategoriesTable.vue";
+   import TablesTable from "./TablesTable.vue";
    import AvatarComponent from "../../components/AvatarComponent.vue";
-   import CategoryForm from "./CategoryForm.vue";
+   import TableForm from "./TableForm.vue";
    import SearchInput  from  "../../components/SearchInput.vue";
    export default {
        components:{
            breadcrumb,
-           CategoryTable,
-           CategoryForm,
+           TablesTable,
+           TableForm,
            AvatarComponent,
            SearchInput,
        },
    data(){
        return {
-           categories:[],
-           latest_categories:[],
+           tables:[],
+           latest_tables:[],
            edit_mode:false,
            loading:false,
            query:"",
@@ -137,11 +137,11 @@
        },
       closePopup() {
          this.resetForm();
-           this.getCategories();
+           this.getTables();
            $("#modal").modal("hide");
        },
        filterData(data){
-        this.categories = data.categories;
+        this.tables = data.tables;
         console.log(this.loading);
        },
 
@@ -160,13 +160,13 @@
             queryParams.set('query', this.query);
              history.replaceState(null, null, "?" + queryParams.toString());
             },
-      async getCategories(page = 1){
+      async getTables(page = 1){
         this.page_num=page;
         this.loading=true;
-        const url=`category?page=${this.page_num}&query=${this.query}`;
+        const url=`table?page=${this.page_num}&query=${this.query}`;
         await axios.get(url).then(response=>{
-                this.categories = response.data.categories;
-                this.latest_categories=response.data.latest_categories;
+                this.tables = response.data.tables;
+                this.latest_tables=response.data.latest_tables;
                 this.loading=false;
                 this.getUriWithParam();
             })
@@ -182,13 +182,13 @@
             confirmButtonText: 'Yes, delete it!'
             }).then((result) => {
             if (result.isConfirmed) {
-                axios.delete('category/'+item.id).then((response)=>{
+                axios.delete('table/'+item.id).then((response)=>{
                          Swal.fire(
                         'Deleted!',
                         'Your file has been deleted.',
                         'success'
                         )
-                    this.getCategories();
+                    this.getTables();
                 });
 
             }
@@ -208,7 +208,7 @@
            else
                this.query=q;
 
-           this.getCategories();
+           this.getTables();
        },
 
    }

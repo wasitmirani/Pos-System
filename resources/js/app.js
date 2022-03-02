@@ -6,9 +6,9 @@ window.Swal = Swal;
 import { createApp } from 'vue';
 import router from './router'
 import LaravelVuePagination from 'laravel-vue-pagination';
-import Multiselect from 'vue-multiselect'
+import AvatarComponent from "./components/backend/components/AvatarComponent";
+
 const app =createApp({
-    components:{Multiselect},
     mounted(){
 
         try {
@@ -20,6 +20,8 @@ const app =createApp({
 
     }
 });
-app.component("Pagination", LaravelVuePagination);
 
+
+app.component("Pagination", LaravelVuePagination);
+app.component("avatar-component", AvatarComponent);
 app.use(router).mount('#app');

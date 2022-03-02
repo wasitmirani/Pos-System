@@ -1,6 +1,6 @@
 <template>
    <div>
-      <breadcrumb active_name="Categories"/>
+      <breadcrumb active_name="Products" :items="[{name:'Categories',link:'/categories'}]"/>
       <div class="row" v-if="latest_products">
          <div class="col-lg-4" v-for="item in latest_products" :key="item.id">
             <div class="card">
@@ -85,7 +85,7 @@
                </div>
                <!--end modal-header-->
                <div class="modal-body">
-                  <product-form :edit_mode="edit_mode" :editForm="edit_data" @created="closePopup()" @updated="closePopup()"/>
+                  <product-form  :categories="categories" :edit_mode="edit_mode" :editForm="edit_data" @created="closePopup()" @updated="closePopup()"/>
                </div>
             </div>
             <!--end modal-content-->
@@ -113,6 +113,7 @@
        return {
            products:[],
            latest_products:[],
+           categories:[],
            edit_mode:false,
            loading:false,
            query:"",
@@ -167,6 +168,7 @@
         await axios.get(url).then(response=>{
                 this.products = response.data.products;
                 this.latest_products=response.data.latest_products;
+                this.categories=response.data.categories;
                 this.loading=false;
                 this.getUriWithParam();
             })
@@ -182,7 +184,7 @@
             confirmButtonText: 'Yes, delete it!'
             }).then((result) => {
             if (result.isConfirmed) {
-                axios.delete('category/'+item.id).then((response)=>{
+                axios.delete('product/'+item.id).then((response)=>{
                          Swal.fire(
                         'Deleted!',
                         'Your file has been deleted.',

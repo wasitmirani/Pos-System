@@ -16,17 +16,13 @@
         </div>
     </div>
     </div>
-     <div class="row">
+     <div class="row mt-3">
      <div class="col-4">
       <div class="form-group">
-
-                                            <label class="mb-3">Default Select</label>
-                                            <select id="default">
-                                                <option value="value-1">Value 1</option>
-                                                <option value="value-2">Value 2</option>
-                                                <option value="value-3">Value 3</option>
-                                            </select>
-
+        <label for="exampleInputEmail1">Select Category</label>
+        <select class="form-select" id="exampleFormControlSelect1" v-model="product.category_id">
+         <option v-for="item in categories" :key="item.id" :value="item.id">{{item.name}}</option>
+        </select>
       </div>
     </div>
     <div class="col-8">
@@ -35,7 +31,8 @@
          <textarea class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" rows="2" placeholder="Enter Product Description" v-model="product.description"></textarea>
       </div>
     </div>
-        <div class="col-6">
+      <div class="row mt-3">
+    <div class="col-6">
       <div class="form-group">
             <div class="d-grid">
 
@@ -45,6 +42,7 @@
              </div>
       </div>
       </div>
+     </div>
      </div>
       <hr>
       <div class="float-right-buttons">
@@ -60,7 +58,7 @@
 <script>
    export default {
 
-       props:['edit_mode','editForm'],
+       props:['edit_mode','editForm','categories'],
        emits: ['created','updated'],
 
        data(){
@@ -136,6 +134,7 @@
        }
    }
 </script>
+<style src="vue-multiselect/dist/vue-multiselect.min.css"></style>
 <style>
 .float-right-buttons{
 float: right;
