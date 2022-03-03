@@ -38,6 +38,10 @@ const routes = [
         path: "/tables", component: () => setComponent("table/Tables"), name: "Users",
         meta: { permissions: "tables-view" }
     },
+    {
+        path: "/pos-system", component: () => setComponent("pos/Pos"), name: "Pos",
+        meta: { permissions: "pos-view" }
+    },
 
 
 

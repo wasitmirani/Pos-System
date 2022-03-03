@@ -48,38 +48,38 @@ class HelperComponent
                ]
                ],
 
-              [
+            //   [
 
-                "menu" => [
-                    "title" => 'User Management',
-                    'can'=>'user-management-dropdown',
-                    "icon" => "user",
-                    "sub_menu" => [
-                        setSubMenu(
-                            "Users",
-                            null,
-                            "users-view",
-                            "/users",
-                        ),
-                        setSubMenu(
-                            "Roles",
-                            null,
-                            "roles-view",
-                            "/roles",
-                        ),
-                        setSubMenu(
-                            "Permissions",
-                            null,
-                            "permissions-view",
-                            "/permissions",
-                        ),
+            //     "menu" => [
+            //         "title" => 'User Management',
+            //         'can'=>'user-management-dropdown',
+            //         "icon" => "user",
+            //         "sub_menu" => [
+            //             setSubMenu(
+            //                 "Users",
+            //                 null,
+            //                 "users-view",
+            //                 "/users",
+            //             ),
+            //             setSubMenu(
+            //                 "Roles",
+            //                 null,
+            //                 "roles-view",
+            //                 "/roles",
+            //             ),
+            //             setSubMenu(
+            //                 "Permissions",
+            //                 null,
+            //                 "permissions-view",
+            //                 "/permissions",
+            //             ),
 
-                    ]
+            //         ]
 
-                ],
+            //  ],
 
-            ],
-            
+            // ],
+
             [
                 "single_link" => setSingleLink("Categories", "link", "categories-view", "/categories"),
             ],

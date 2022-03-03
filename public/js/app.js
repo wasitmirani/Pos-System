@@ -23155,6 +23155,15 @@ var routes = [{
   meta: {
     permissions: "tables-view"
   }
+}, {
+  path: "/pos-system",
+  component: function component() {
+    return setComponent("pos/Pos");
+  },
+  name: "Pos",
+  meta: {
+    permissions: "pos-view"
+  }
 }];
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ((0,vue_router__WEBPACK_IMPORTED_MODULE_0__.createRouter)({
   history: (0,vue_router__WEBPACK_IMPORTED_MODULE_0__.createWebHistory)(),
@@ -59116,6 +59125,16 @@ var map = {
 		9,
 		"resources_js_components_backend_pages_error_404Component_vue"
 	],
+	"./components/backend/pages/pos/PosComponent": [
+		"./resources/js/components/backend/pages/pos/PosComponent.vue",
+		9,
+		"resources_js_components_backend_pages_pos_PosComponent_vue"
+	],
+	"./components/backend/pages/pos/PosComponent.vue": [
+		"./resources/js/components/backend/pages/pos/PosComponent.vue",
+		9,
+		"resources_js_components_backend_pages_pos_PosComponent_vue"
+	],
 	"./components/backend/pages/product/ProductForm": [
 		"./resources/js/components/backend/pages/product/ProductForm.vue",
 		9,
@@ -59363,7 +59382,7 @@ module.exports = JSON.parse('{"name":"axios","version":"0.21.4","description":"P
 /******/ 		// This function allow to reference async chunks
 /******/ 		__webpack_require__.u = (chunkId) => {
 /******/ 			// return url for filenames not based on template
-/******/ 			if ({"resources_js_components_backend_components_AlertComponent_vue":1,"resources_js_components_backend_components_SearchInput_vue":1,"resources_js_components_backend_components_TableFooterComponent_vue":1,"resources_js_components_backend_components_breadcrumbComponent_vue":1,"resources_js_components_backend_pages_category_CategoriesComponent_vue":1,"resources_js_components_backend_pages_category_CategoriesTable_vue":1,"resources_js_components_backend_pages_category_CategoryForm_vue":1,"resources_js_components_backend_pages_dashboard_HomeComponent_vue":1,"resources_js_components_backend_pages_error_404Component_vue":1,"resources_js_components_backend_pages_product_ProductForm_vue":1,"resources_js_components_backend_pages_product_ProductTable_vue":1,"resources_js_components_backend_pages_product_ProductsComponent_vue":1,"resources_js_components_backend_pages_table_TableForm_vue":1,"resources_js_components_backend_pages_table_TablesComponent_vue":1,"resources_js_components_backend_pages_table_TablesTable_vue":1,"resources_js_components_welcome_vue":1}[chunkId]) return "js/" + chunkId + ".js";
+/******/ 			if ({"resources_js_components_backend_components_AlertComponent_vue":1,"resources_js_components_backend_components_SearchInput_vue":1,"resources_js_components_backend_components_TableFooterComponent_vue":1,"resources_js_components_backend_components_breadcrumbComponent_vue":1,"resources_js_components_backend_pages_category_CategoriesComponent_vue":1,"resources_js_components_backend_pages_category_CategoriesTable_vue":1,"resources_js_components_backend_pages_category_CategoryForm_vue":1,"resources_js_components_backend_pages_dashboard_HomeComponent_vue":1,"resources_js_components_backend_pages_error_404Component_vue":1,"resources_js_components_backend_pages_pos_PosComponent_vue":1,"resources_js_components_backend_pages_product_ProductForm_vue":1,"resources_js_components_backend_pages_product_ProductTable_vue":1,"resources_js_components_backend_pages_product_ProductsComponent_vue":1,"resources_js_components_backend_pages_table_TableForm_vue":1,"resources_js_components_backend_pages_table_TablesComponent_vue":1,"resources_js_components_backend_pages_table_TablesTable_vue":1,"resources_js_components_welcome_vue":1}[chunkId]) return "js/" + chunkId + ".js";
 /******/ 			// return url for filenames based on template
 /******/ 			return undefined;
 /******/ 		};
