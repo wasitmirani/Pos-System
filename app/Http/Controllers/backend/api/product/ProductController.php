@@ -39,12 +39,13 @@ class ProductController extends Controller
         $validated = $request->validate([
             'name' => 'required|unique:products|max:255',]);
 
+        $thumbnail=singleImgUpload($request,'/uploads/products');
         return $this->product->create([
             'name'=>$request->name,
             'price'=>$request->price,
             'description'=>$request->description,
             'category_id'=>$request->category_id,
-            'thumbnail'=>'ww',
+            'thumbnail'=>$thumbnail,
             'slug'=>Str::snake($request->name, '-'),
         ]);
     }

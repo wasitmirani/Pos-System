@@ -23020,6 +23020,17 @@ window.Swal = (sweetalert2__WEBPACK_IMPORTED_MODULE_0___default());
 
 
 var app = (0,vue__WEBPACK_IMPORTED_MODULE_1__.createApp)({
+  filters: {
+    productLimit: function productLimit(value) {
+      if (value) {
+        if (value.length > 0) {
+          return value.slice(0, 35) + "...";
+        } else {
+          return 'N/A';
+        }
+      }
+    }
+  },
   mounted: function mounted() {
     try {
       document.getElementById('togglemenu').addEventListener("click", function (event) {

@@ -1,63 +1,189 @@
 <template>
-<div>
-     <breadcrumb active_name="POS System"/>
- <div class="row">
-                        <div class="col-lg-7">
-                            <div class="card">
-                                <div class="card-header">
-                                    <h4 class="card-title">POS System</h4>
-                                   </div>
-                                <div class="card-body">
-                                    <div class="col-md-3">
-                            <div class="card">
-                                <div class="card-body">
-                                    <!-- <div class="ribbon1 rib1-primary">
-                                        <span class="text-white text-center rib1-primary">50% off</span>
-                                    </div> -->
-                                    <!--end ribbon-->
-                                    <img src="assets/images/products/05.png" alt="" class="d-block mx-auto my-4" height="60" width="60">
-                                    <div class="d-flex justify-content-between align-items-center my-4">
-                                        <div>
-                                            <p class="text-muted mb-2">Electric</p>
-                                            <a href="#" class="header-title">Fever Gun</a>
-                                        </div>
-                                        <div>
-                                            <span class="text-dark mt-0 mb-2">$49.00 <small class="text-muted font-14">
-                                     
-                                            </small>
-                                            </span>
+   <div>
+      <breadcrumb active_name="POS System"/>
+      <div class="row">
+         <div class="col-lg-7">
+            <div class="card">
+               <div class="card-header">
+                  <h4 class="card-title">POS System</h4>
+                  <search-input :apiurl="'/pos?'" placeholder="Search By Product Name" />
+               </div>
+               <div class="card-body" id="products_menu">
+                  <div class="row">
+                        <div class="d-flex justify-content-center" v-if="loading">
+                     <!-- <strong>Loading...</strong> -->
+                     <div class="spinner-border text-dark" role="status"></div>
+                  </div>
 
-                                        </div>
-                                    </div>
-                                    <div class="d-grid">
-                                        <button class="btn btn-soft-primary">Add To Cart</button>
-                                    </div>
-                                </div><!--end card-body-->
-                            </div><!--end card-->
-                        </div><!--end col-->
-                                </div>
-                            </div>
+                     <div class="col-md-4" v-for="item in products" :key="item.id" v-else>
+                        <div class="card">
+                           <div class="card-body" >
+                              <span class="badge bg-dark">{{item.category.name}}</span>
+                              <div class="text-center">
+                                 <img :src="item.thumbnail" alt="" height="100">
+                              </div>
+                              <!--end media-->
+                              <div class=" ms-2">
+                                 <small class="mb-2"  data-bs-toggle="tooltip" data-bs-placement="top" :title="item.name"> {{ item.name.slice(0, 23)+"..."  }}</small>
+                                 <div style="float:right">
+                                    <button type="button" @click="addCart(item)" class="btn btn-danger btn-icon-square-sm">
+                                    <i class="mdi mdi-shopping"></i></button>
+                                 </div>
+                              </div>
+                           </div>
+                           <!--end card-body-->
                         </div>
-                       <div class="col-lg-5">
-                            <div class="card">
-                                 <div class="card-header">
-                                    <h4 class="card-title">Order Invoice</h4>
-                                   </div>
-                                <div class="card-body">
+                     </div>
+                  </div>
+                  <!--end col-->
+               </div>
+            </div>
+         </div>
+         <div class="col-lg-5">
+            <div class="card">
+               <div class="card-header">
+                  <h4 class="card-title">Order Items</h4>
+               </div>
+               <div class="card-body">
+                 <div id="sidebar">
+                  <div class="table-responsive">
+                     <table class="table mb-0">
+                        <thead class="thead-light">
+                           <tr>
+                              <th class="border-top-0">Item</th>
+                              <th class="border-top-0">Qty</th>
+                              <th class="border-top-0">Price</th>
+                              <th class="border-top-0">Total</th>
+                             <th class="border-top-0">Action</th>
+                           </tr>
+                           <!--end tr-->
+                        </thead>
+                        <tbody>
+                            <tr v-if="this.cart_items.length < 1 ">
+                                <td colspan="5">
+                                    <div class="alert alert-warning border-0" role="alert">
+                                    <strong>Empty Cart!</strong> Your order cart is empty. 😀
                                 </div>
-                            </div>
-        </div>
-</div>
-</div>
+                                </td>
+                            </tr>
+                           <tr v-for="item in cart_items" :key="item.id" v-else>
+                              <td>
+
+                                <small>{{item.name}}</small>
+                              </td>
+                               <td>
+                                   <div class="row">
+                                       <div class="col">
+                                      <i class="fas fa-minus-circle"  @click="decrementQty(item)"></i>
+
+                                      {{item.qty}}
+                                           <i class="fas fa-plus-circle"  @click="addCart(item)"></i>
+                                       </div>
+
+                                   </div>
+                               </td>
+                              <td>{{item.price}}  </td>
+                              <td>
+                                  {{item.qty*item.price}}
+                              </td>
+                            <td>
+                              <a role="button" @click="removeCart(item)"><i class="las la-trash-alt text-danger font-16"></i></a>
+                            </td>
+                           </tr>
+                           <!--end tr-->
+
+
+                        </tbody>
+                     </table>
+                     <!--end table-->
+                  </div>
+                  </div>
+                  <hr>
+                  <div class="total-payment">
+                                        <table class="table mb-0">
+                                            <tbody>
+                                                <tr>
+                                                    <td class="fw-semibold">Subtotal</td>
+                                                    <td>$496.00</td>
+                                                </tr>
+
+
+                                                <tr>
+                                                    <td class="fw-semibold  border-bottom-0">Total</td>
+                                                    <td class="text-dark  border-bottom-0"><strong>$491.00</strong></td>
+                                                </tr>
+                                            </tbody>
+                                        </table><!--end table-->
+                                    </div><!--end total-payment-->
+                  <!--end /div-->
+               </div>
+            </div>
+         </div>
+      </div>
+   </div>
 </template>
-
 <script>
- import breadcrumb from "../../components/breadcrumbComponent.vue";
-export default {
-    components:{breadcrumb},
-}
+   import breadcrumb from "../../components/breadcrumbComponent.vue";
+    import SearchInput from "../../components/SearchInput.vue";
+   export default {
+      components:{breadcrumb,SearchInput},
+      data(){
+          return{
+           products:[],
+           categories:[],
+           loading:false,
+           cart_items:[],
+          };
+      },
+      methods:{
+        addCart(item){
+          const new_item={id:item.id,name:item.name,price:item.price,qty:1};
+
+            const i = this.cart_items.findIndex(_item => _item.id === item.id);
+            if (i > -1){
+                this.cart_items[i].qty++;
+            }else{
+                this.cart_items.push(new_item);
+            }
+
+        },
+        decrementQty(item){
+            if(item.qty>1){
+
+            const i = this.cart_items.findIndex(_item => _item.id === item.id);
+            if (i > -1){
+                this.cart_items[i].qty--;
+            }
+          }
+          else
+           this.removeCart(item);
+        },
+        removeCart(item){
+
+        },
+         async getProducts(){
+             this.loading=true;
+             await axios.get('/pos').then((res)=>{
+                 this.products=res.data.products;
+                 this.categories=res.data.categories;
+                 this.loading=false;
+             });
+          },
+      },
+      mounted() {
+          this.getProducts();
+      },
+   }
 </script>
-
 <style>
+#sidebar {
 
+    height:300px;
+    overflow-y: scroll;
+}
+#products_menu {
+
+    height:450px;
+    overflow-y: scroll;
+}
 </style>

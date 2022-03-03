@@ -2,6 +2,7 @@
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\backend\api\pos\PosController;
 use App\Http\Controllers\backend\api\table\TableController;
 use App\Http\Controllers\backend\api\product\ProductController;
 use App\Http\Controllers\backend\api\category\CategoryController;
@@ -26,4 +27,8 @@ Route::middleware(['auth:sanctum'])->group(function () {
     Route::resource('category', CategoryController::class);
     Route::resource('product', ProductController::class);
     Route::resource('table', TableController::class);
+
+    Route::prefix('pos')->group(function () {
+        Route::get('/',[PosController::class,'getAllProducts']);
+    });
 });

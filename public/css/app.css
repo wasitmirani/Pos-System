@@ -843,6 +843,9 @@ select {
 .border {
   border-width: 1px;
 }
+.border-0 {
+  border-width: 0px;
+}
 .border-b {
   border-bottom-width: 1px;
 }
@@ -1019,6 +1022,9 @@ select {
 .uppercase {
   text-transform: uppercase;
 }
+.capitalize {
+  text-transform: capitalize;
+}
 .leading-tight {
   line-height: 1.25;
 }
@@ -1120,6 +1126,9 @@ select {
 }
 .ring-opacity-5 {
   --tw-ring-opacity: 0.05;
+}
+.filter {
+  filter: var(--tw-blur) var(--tw-brightness) var(--tw-contrast) var(--tw-grayscale) var(--tw-hue-rotate) var(--tw-invert) var(--tw-saturate) var(--tw-sepia) var(--tw-drop-shadow);
 }
 .transition {
   transition-property: color, background-color, border-color, fill, stroke, opacity, box-shadow, transform, filter, -webkit-text-decoration-color, -webkit-backdrop-filter;

@@ -5,8 +5,8 @@
       <div class="row">
     <div class="col-8">
         <div class="form-group">
-         <label for="exampleInputEmail1">Product Name</label>
-         <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter Product Name" v-model="product.name" required>
+         <label for="exampleInput">Product Name</label>
+         <input type="text" class="form-control"  placeholder="Enter Product Name" v-model="product.name" required>
         </div>
     </div>
      <div class="col-4">
@@ -20,7 +20,7 @@
      <div class="col-4">
       <div class="form-group">
         <label for="exampleInputEmail1">Select Category</label>
-        <select class="form-select" id="exampleFormControlSelect1" v-model="product.category_id">
+        <select class="form-select" id="exampleFormControlSelect1" v-model="product.category_id" required>
          <option v-for="item in categories" :key="item.id" :value="item.id">{{item.name}}</option>
         </select>
       </div>
@@ -31,13 +31,13 @@
          <textarea class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" rows="2" placeholder="Enter Product Description" v-model="product.description"></textarea>
       </div>
     </div>
-      <div class="row mt-3">
+      <div class="row mt-3"  v-if="!edit_mode">
     <div class="col-6">
       <div class="form-group">
             <div class="d-grid">
 
                 <div class="preview-box d-block justify-content-center rounded shadow overflow-hidden bg-light p-1"></div>
-                <input type="file" id="input-file" name="input-file" accept="image/*" onchange={handleChange()} hidden />
+                <input type="file" @change="previewFiles" ref="file" id="input-file" name="input-file" accept="image/*" onchange={handleChange()} hidden />
                 <label class="btn-upload btn btn-primary mt-4" for="input-file">Upload Image</label>
              </div>
       </div>
@@ -100,13 +100,19 @@
                 title: title,
               })
         },
-           onSubmit(){
-               let data = this.product;
+         previewFiles(event) {
+      console.log(event.target.files);
+      this.product.thumbnail = this.$refs.file.files[0];
+   },
+       async    onSubmit(){
+
                 // this.$emit('created')
                if(this.edit_mode){
-                   this.updateItem(data);
+                  await this.updateItem(this.product);
                 }else {
-                   this.createItem(data);
+                    let formData = new FormData();
+                    Object.keys(this.product).forEach(key => formData.append(key, this.product[key]));
+                  await  this.createItem(formData);
                 }
            },
            createItem(data){

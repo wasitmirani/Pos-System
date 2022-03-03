@@ -9,8 +9,19 @@ import LaravelVuePagination from 'laravel-vue-pagination';
 import AvatarComponent from "./components/backend/components/AvatarComponent";
 
 const app =createApp({
+    filters: {
+        productLimit: function (value) {
+            if (value) {
+                if (value.length > 0) {
+                   return value.slice(0, 35) + "...";
+                }
+                else {
+                return 'N/A';
+            }
+         }
+        }
+      },
     mounted(){
-
         try {
             document.getElementById('togglemenu').addEventListener("click", function (event) {
                 event.preventDefault();

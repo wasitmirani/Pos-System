@@ -14,6 +14,17 @@ class Product extends Model
     {
         return $this->belongsTo(Category::class);
     }
+    public function getThumbnailAttribute($value)
+    {
+        if(!empty($value))
+        return asset('/uploads/products/'.$value);
+        else
+        return asset('/uploads/products/default.png');
+    }
+    public function setCurrencyAttribute($value)
+    {
+        $this->attributes['currency']= "Rs.".$value;
+    }
     public function getProducts($request){
         $q=!empty(request('query')) ? request('query') : "";
         $per_page=!empty($request->per_page) ?  $request->per_page  : env('PER_PAGE');
