@@ -5671,6 +5671,11 @@
   "resolved" "https://registry.npmjs.org/vue-multiselect/-/vue-multiselect-2.1.6.tgz"
   "version" "2.1.6"
 
+"vue-router@^3.3.4":
+  "integrity" "sha512-FUlILrW3DGitS2h+Xaw8aRNvGTwtuaxrRkNSHWTizOfLUie7wuYwezeZ50iflRn8YPV5kxmU2LQuu3nM/b3Zsg=="
+  "resolved" "https://registry.npmjs.org/vue-router/-/vue-router-3.5.3.tgz"
+  "version" "3.5.3"
+
 "vue-router@^4.0.12":
   "integrity" "sha512-CPXvfqe+mZLB1kBWssssTiWg4EQERyqJZes7USiqfW9B5N2x+nHlnsM1D3b5CaJ6qgCvMmYJnz+G0iWjNCvXrg=="
   "resolved" "https://registry.npmjs.org/vue-router/-/vue-router-4.0.12.tgz"
@@ -5686,7 +5691,12 @@
     "hash-sum" "^1.0.2"
     "loader-utils" "^1.0.2"
 
-"vue@^3.0.0", "vue@^3.2.25", "vue@^3.2.29", "vue@3.2.31":
+"vue-toastification@^2.0.0-rc.5":
+  "integrity" "sha512-q73e5jy6gucEO/U+P48hqX+/qyXDozAGmaGgLFm5tXX4wJBcVsnGp4e/iJqlm9xzHETYOilUuwOUje2Qg1JdwA=="
+  "resolved" "https://registry.npmjs.org/vue-toastification/-/vue-toastification-2.0.0-rc.5.tgz"
+  "version" "2.0.0-rc.5"
+
+"vue@^3.0.0", "vue@^3.0.2", "vue@^3.2.25", "vue@^3.2.29", "vue@3.2.31":
   "integrity" "sha512-odT3W2tcffTiQCy57nOT93INw1auq5lYLLYtWpPYQQYQOOdHiqFct9Xhna6GJ+pJQaF67yZABraH47oywkJgFw=="
   "resolved" "https://registry.npmjs.org/vue/-/vue-3.2.31.tgz"
   "version" "3.2.31"
@@ -5696,6 +5706,13 @@
     "@vue/runtime-dom" "3.2.31"
     "@vue/server-renderer" "3.2.31"
     "@vue/shared" "3.2.31"
+
+"vuesax@^4.0.1-alpha.25":
+  "integrity" "sha512-cVLpKsem/YsMSbiy2s2M0O6rr8wrakOUFn0JYxtVQ1WgbVUD0/kU2/GMPVeRBNOh+30tRy2TKreFmjqc53vIBQ=="
+  "resolved" "https://registry.npmjs.org/vuesax/-/vuesax-4.0.1-alpha.25.tgz"
+  "version" "4.0.1-alpha.25"
+  dependencies:
+    "vue-router" "^3.3.4"
 
 "watchpack@^2.3.1":
   "integrity" "sha512-x0t0JuydIo8qCNctdDrn1OzH/qDzk2+rdCOC3YzumZ42fiMqmQ7T3xQurykYMhYfHaPHTp4ZxAx2NfUo1K6QaA=="

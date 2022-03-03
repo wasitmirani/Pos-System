@@ -6,7 +6,7 @@
             <div class="card">
                <div class="card-header">
                   <h4 class="card-title">POS System</h4>
-                  <search-input :apiurl="'/pos?'" placeholder="Search By Product Name" />
+                  <search-input apiurl="/pos?" placeholder="Search By Product Name" />
                </div>
                <div class="card-body" id="products_menu">
                   <div class="row">
@@ -24,7 +24,7 @@
                               </div>
                               <!--end media-->
                               <div class=" ms-2">
-                                 <small class="mb-2"  data-bs-toggle="tooltip" data-bs-placement="top" :title="item.name"> {{ item.name.slice(0, 23)+"..."  }}</small>
+                                 <small class="mb-2"  data-bs-toggle="tooltip" data-bs-placement="top" :title="item.name"> {{ item.name.slice(0, 20)+"..."  }}</small>
                                  <div style="float:right">
                                     <button type="button" @click="addCart(item)" class="btn btn-danger btn-icon-square-sm">
                                     <i class="mdi mdi-shopping"></i></button>
@@ -104,13 +104,13 @@
                                             <tbody>
                                                 <tr>
                                                     <td class="fw-semibold">Subtotal</td>
-                                                    <td>$496.00</td>
+                                                    <td>Rs.{{subTotal}}</td>
                                                 </tr>
 
 
                                                 <tr>
                                                     <td class="fw-semibold  border-bottom-0">Total</td>
-                                                    <td class="text-dark  border-bottom-0"><strong>$491.00</strong></td>
+                                                    <td class="text-dark  border-bottom-0"><strong>Rs.{{subTotal}}</strong></td>
                                                 </tr>
                                             </tbody>
                                         </table><!--end table-->
@@ -125,27 +125,45 @@
 <script>
    import breadcrumb from "../../components/breadcrumbComponent.vue";
     import SearchInput from "../../components/SearchInput.vue";
+
    export default {
       components:{breadcrumb,SearchInput},
+
       data(){
           return{
            products:[],
            categories:[],
            loading:false,
            cart_items:[],
+
           };
       },
+      computed:{
+            subTotal(){
+              const total=  this.cart_items.map((x)=>{
+                    return x.qty*x.price;
+                });
+             return  total.reduce((partialSum, a) => partialSum + a, 0);
+            }
+        },
       methods:{
+
         addCart(item){
           const new_item={id:item.id,name:item.name,price:item.price,qty:1};
 
             const i = this.cart_items.findIndex(_item => _item.id === item.id);
             if (i > -1){
                 this.cart_items[i].qty++;
+                this.$root.toast.info(item.name+"  has quantity  been updated successfully", {
+                timeout: 1000
+            });
             }else{
-                this.cart_items.push(new_item);
+            this.cart_items.push(new_item);
+              this.$root.toast.success(item.name+"  has been added successfully", {
+                timeout: 1000
+             });
             }
-
+        // this.$root.alertNotify();
         },
         decrementQty(item){
             if(item.qty>1){
@@ -153,6 +171,9 @@
             const i = this.cart_items.findIndex(_item => _item.id === item.id);
             if (i > -1){
                 this.cart_items[i].qty--;
+              this.$root.toast.error(item.name+"  quantity has been less  successfully", {
+                timeout: 1000
+             });
             }
           }
           else

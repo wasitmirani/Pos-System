@@ -16,7 +16,9 @@
         "vue": "^3.2.29",
         "vue-content-placeholders": "^0.2.1",
         "vue-multiselect": "^2.1.6",
-        "vue-router": "^4.0.12"
+        "vue-router": "^4.0.12",
+        "vue-toastification": "^2.0.0-rc.5",
+        "vuesax": "^4.0.1-alpha.25"
     },
     "devDependencies": {
         "@tailwindcss/forms": "^0.4.0",
