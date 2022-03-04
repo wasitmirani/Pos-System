@@ -114,7 +114,11 @@
                                                 </tr>
                                             </tbody>
                                         </table><!--end table-->
+
                                     </div><!--end total-payment-->
+                                    <hr>
+                                    <button type="button" class="btn btn-primary" @click="onSubmit"><i class="mdi mdi-send me-2"></i>Place Order</button>
+                                    <!-- <button type="button" class="btn btn-de-primary">Place Order</button> -->
                   <!--end /div-->
                </div>
             </div>
@@ -147,7 +151,17 @@
             }
         },
       methods:{
-
+        onSubmit(){
+            const order={table_id:null,total:this.subTotal};
+            let data = {order:order,items:this.cart_items};
+            axios.post('pos/order/create',data).then((res)=>{
+                console.log(res.data);
+                this.cart_items=[];
+             this.$root.toast.success("order has been processed", {
+                timeout: 1000
+             });
+            });
+        },
         addCart(item){
           const new_item={id:item.id,name:item.name,price:item.price,qty:1};
 
@@ -180,7 +194,24 @@
            this.removeCart(item);
         },
         removeCart(item){
-
+            Swal.fire({
+            title: 'Are you sure?',
+            text: "You won't be able to revert this!",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Yes, delete it!'
+            }).then((result) => {
+            if (result.isConfirmed) {
+                this.cart_items.pop(item);
+                Swal.fire(
+                'Deleted!',
+                'Your file has been deleted.',
+                'success'
+                )
+            }
+            })
         },
          async getProducts(){
              this.loading=true;

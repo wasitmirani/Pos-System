@@ -18,8 +18,9 @@
                <tr v-for="item in products.data" :key="item.id" v-else>
                   <td>
                      <div class="media">
-                        <AvatarComponent :name="item.name" />
-                        <div class="media-body align-self-center">
+                        <!-- <AvatarComponent :name="item.name" /> -->
+                        <img :src="item.thumbnail" alt="user" class="thumb-md rounded-circle">
+                        <div style="margin-left:10px;" class="media-body align-self-center">
                            <h6 class="m-0">{{item.name}}</h6>
                            <a role="button" @click="edited(item)" class="font-12 text-primary">ID: {{item.id}}</a>
                         </div>

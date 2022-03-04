@@ -30,5 +30,11 @@ Route::middleware(['auth:sanctum'])->group(function () {
 
     Route::prefix('pos')->group(function () {
         Route::get('/',[PosController::class,'getAllProducts']);
+        Route::prefix('order')->group(function () {
+            Route::post('/create',[PosController::class,'createOrder']);
+        });
     });
+
+
+
 });

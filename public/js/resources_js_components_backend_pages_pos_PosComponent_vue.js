@@ -185,6 +185,26 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
     }
   },
   methods: {
+    onSubmit: function onSubmit() {
+      var _this = this;
+
+      var order = {
+        table_id: null,
+        total: this.subTotal
+      };
+      var data = {
+        order: order,
+        items: this.cart_items
+      };
+      axios.post('pos/order/create', data).then(function (res) {
+        console.log(res.data);
+        _this.cart_items = [];
+
+        _this.$root.toast.success("order has been processed", {
+          timeout: 1000
+        });
+      });
+    },
     addCart: function addCart(item) {
       var new_item = {
         id: item.id,
@@ -223,21 +243,39 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
         }
       } else this.removeCart(item);
     },
-    removeCart: function removeCart(item) {},
+    removeCart: function removeCart(item) {
+      var _this2 = this;
+
+      Swal.fire({
+        title: 'Are you sure?',
+        text: "You won't be able to revert this!",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Yes, delete it!'
+      }).then(function (result) {
+        if (result.isConfirmed) {
+          _this2.cart_items.pop(item);
+
+          Swal.fire('Deleted!', 'Your file has been deleted.', 'success');
+        }
+      });
+    },
     getProducts: function getProducts() {
-      var _this = this;
+      var _this3 = this;
 
       return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee() {
         return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee$(_context) {
           while (1) {
             switch (_context.prev = _context.next) {
               case 0:
-                _this.loading = true;
+                _this3.loading = true;
                 _context.next = 3;
                 return axios.get('/pos').then(function (res) {
-                  _this.products = res.data.products;
-                  _this.categories = res.data.categories;
-                  _this.loading = false;
+                  _this3.products = res.data.products;
+                  _this3.categories = res.data.categories;
+                  _this3.loading = false;
                 });
 
               case 3:
@@ -572,6 +610,20 @@ var _hoisted_43 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElement
 var _hoisted_44 = {
   "class": "text-dark border-bottom-0"
 };
+
+var _hoisted_45 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("hr", null, null, -1
+/* HOISTED */
+);
+
+var _hoisted_46 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("i", {
+  "class": "mdi mdi-send me-2"
+}, null, -1
+/* HOISTED */
+);
+
+var _hoisted_47 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)("Place Order");
+
+var _hoisted_48 = [_hoisted_46, _hoisted_47];
 function render(_ctx, _cache, $props, $setup, $data, $options) {
   var _component_breadcrumb = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("breadcrumb");
 
@@ -655,7 +707,13 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
   /* TEXT */
   )]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("tr", null, [_hoisted_43, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("td", _hoisted_44, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("strong", null, "Rs." + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($options.subTotal), 1
   /* TEXT */
-  )])])])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("end table")]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("end total-payment"), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("end /div")])])])])]);
+  )])])])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("end table")]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("end total-payment"), _hoisted_45, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
+    type: "button",
+    "class": "btn btn-primary",
+    onClick: _cache[0] || (_cache[0] = function () {
+      return $options.onSubmit && $options.onSubmit.apply($options, arguments);
+    })
+  }, _hoisted_48), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" <button type=\"button\" class=\"btn btn-de-primary\">Place Order</button> "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("end /div")])])])])]);
 }
 
 /***/ }),

@@ -13,7 +13,7 @@
                                     <img src="assets/images/logo-sm.png" height="50" alt="logo" class="auth-logo">
                                 </a>
                                 <h4 class="mt-3 mb-1 fw-semibold text-white font-18">Oops! Sorry page does not found</h4>
-                                <p class="text-muted  mb-0">Back to dashboard of Unikit.</p>
+                                <p class="text-muted  mb-0">Back to dashboard of {{config('app.name')}}.</p>
                             </div>
                         </div>
                         <div class="card-body">
