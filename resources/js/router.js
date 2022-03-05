@@ -42,6 +42,10 @@ const routes = [
         path: "/pos-system", component: () => setComponent("pos/Pos"), name: "Pos",
         meta: { permissions: "pos-view" }
     },
+    {
+        path: "/daily-orders", component: () => setComponent("order/DailyOrders"), name: "daily-orders",
+        meta: { permissions: "daily-orders-view" }
+    },
 
 
 

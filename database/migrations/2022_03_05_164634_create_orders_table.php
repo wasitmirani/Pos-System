@@ -17,7 +17,10 @@ return new class extends Migration
             $table->id();
             $table->foreignId('user_id')->nullable()->constrained('users');
             $table->foreignId('table_id')->nullable()->constrained('tables');
+            $table->string('order_no');
+            $table->string('order_type');
             $table->foreignId('order_status_id')->nullable()->constrained('order_statuses');
+            $table->foreignId('payment_status_id')->default(1)->constrained('payment_statuses');
             $table->double('total', 15, 2)->nullable()->default(0.00);
             $table->softDeletes();
             $table->timestamps();

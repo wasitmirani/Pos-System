@@ -2,7 +2,9 @@ require('./bootstrap');
 
 require('alpinejs');
 import Swal from 'sweetalert2'
+import moment from "moment";
 window.Swal = Swal;
+window.moment=moment;
 import { createApp } from 'vue';
 import router from './router'
 import LaravelVuePagination from 'laravel-vue-pagination';
@@ -11,6 +13,7 @@ import AvatarComponent from "./components/backend/components/AvatarComponent";
 import Toast from "vue-toastification";
 import "vue-toastification/dist/index.css";
 import { useToast } from "vue-toastification";
+
 const app =createApp({
     setup() {
         // Get toast interface
@@ -53,7 +56,8 @@ const app =createApp({
 app.use(Toast,{
     transition: "Vue-Toastification__fade",
     maxToasts: 19,
-    newestOnTop: true
+    newestOnTop: true,
+    pauseOnHover: false,
   });
 app.component("Pagination", LaravelVuePagination);
 app.component("avatar-component", AvatarComponent);

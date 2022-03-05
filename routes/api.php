@@ -3,6 +3,7 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\backend\api\pos\PosController;
+use App\Http\Controllers\backend\api\order\OrderController;
 use App\Http\Controllers\backend\api\table\TableController;
 use App\Http\Controllers\backend\api\product\ProductController;
 use App\Http\Controllers\backend\api\category\CategoryController;
@@ -32,9 +33,14 @@ Route::middleware(['auth:sanctum'])->group(function () {
         Route::get('/',[PosController::class,'getAllProducts']);
         Route::prefix('order')->group(function () {
             Route::post('/create',[PosController::class,'createOrder']);
+            Route::get('update-status',[PosController::class,'updateOrderStatus']);
+            Route::get('delete/{id}',[PosController::class,'deleteOrder']);
         });
     });
 
+    Route::prefix('orders')->group(function () {
+            Route::get('/daily',[OrderController::class,'getDailyOrders']);
+    });
 
 
 });

@@ -6,10 +6,16 @@
             <div class="card">
                <div class="card-header">
                   <h4 class="card-title">POS System</h4>
-                  <search-input apiurl="/pos?" placeholder="Search By Product Name" />
+                  <search-input apiurl="/pos?" placeholder="Search By Product Name"  @query="isQuery($event)" @loading="isLoading($event)" @reload="getProducts()" @filterdata="filterData($event)" :query_input="query"/>
                </div>
                <div class="card-body" id="products_menu">
-                  <div class="row">
+                 <div class="row" v-if="products.length<1">
+                      <div class="alert alert-warning border-0" role="alert">
+                                    <strong>404!</strong> Not found any product this query
+                                    " {{this.query}} "
+                                </div>
+                 </div>
+                  <div class="row" v-else>
                         <div class="d-flex justify-content-center" v-if="loading">
                      <!-- <strong>Loading...</strong> -->
                      <div class="spinner-border text-dark" role="status"></div>
@@ -43,6 +49,30 @@
             <div class="card">
                <div class="card-header">
                   <h4 class="card-title">Order Items</h4>
+                      <form v-on:submit.prevent="onSubmit">
+                     <div class="row">
+
+                                            <div class="col-4">
+                                                <select class="form-select" aria-label="Default select example" required v-model="order_type">
+                                                    <option selected value="">Select Order Type</option>
+                                                    <option value="dining">Dining </option>
+                                                    <option value="takeaway">Takeaway</option>
+                                                    <option value="delivery">Delivery </option>
+                                                  </select>
+                                            </div>
+                           <div class="col-4">
+                                                <select class="form-select" aria-label="Default select example"  v-model="table_id">
+                                                    <option selected value="">Select Order Table</option>
+                                                    <option v-for="item in tables" :key="item.id" :value="item.id">{{item.name}} </option>
+
+                                                  </select>
+                                            </div>
+                    <div class="col-4">
+                                            <button type="submit" class="btn btn-primary" ><i class="mdi mdi-send me-2"></i>Place Order</button>
+
+                    </div>
+                     </div>
+                      </form>
                </div>
                <div class="card-body">
                  <div id="sidebar">
@@ -117,7 +147,7 @@
 
                                     </div><!--end total-payment-->
                                     <hr>
-                                    <button type="button" class="btn btn-primary" @click="onSubmit"><i class="mdi mdi-send me-2"></i>Place Order</button>
+
                                     <!-- <button type="button" class="btn btn-de-primary">Place Order</button> -->
                   <!--end /div-->
                </div>
@@ -138,7 +168,11 @@
            products:[],
            categories:[],
            loading:false,
+           table_id:"",
+           order_type:"",
+           query:"",
            cart_items:[],
+           tables:[],
 
           };
       },
@@ -151,8 +185,26 @@
             }
         },
       methods:{
+          filterData(data){
+        this.products = data.products;
+        console.log(this.loading);
+       },
+
+       isLoading(value) {
+        this.loading = value;
+      //   this.getUriWithParam();
+        },
+        isQuery(query){
+         (this.query = query);
+        //   this.getUriWithParam();
+        },
         onSubmit(){
-            const order={table_id:null,total:this.subTotal};
+            if(this.cart_items.length < 1){
+               this.$root.toast.warning(item.name+"  has quantity  been updated successfully", {
+                timeout: 1000
+            });
+            }
+            const order={order_type:this.order_type,table_id:this.table_id,total:this.subTotal};
             let data = {order:order,items:this.cart_items};
             axios.post('pos/order/create',data).then((res)=>{
                 console.log(res.data);
@@ -160,6 +212,7 @@
              this.$root.toast.success("order has been processed", {
                 timeout: 1000
              });
+                localStorage.setItem('cart_items', JSON.stringify(this.cart_items));
             });
         },
         addCart(item){
@@ -177,6 +230,7 @@
                 timeout: 1000
              });
             }
+            localStorage.setItem('cart_items', JSON.stringify(this.cart_items))
         // this.$root.alertNotify();
         },
         decrementQty(item){
@@ -184,7 +238,8 @@
 
             const i = this.cart_items.findIndex(_item => _item.id === item.id);
             if (i > -1){
-                this.cart_items[i].qty--;
+              this.cart_items[i].qty--;
+              localStorage.setItem('cart_items', JSON.stringify(this.cart_items))
               this.$root.toast.error(item.name+"  quantity has been less  successfully", {
                 timeout: 1000
              });
@@ -204,7 +259,11 @@
             confirmButtonText: 'Yes, delete it!'
             }).then((result) => {
             if (result.isConfirmed) {
-                this.cart_items.pop(item);
+               const index = this.cart_items.indexOf(item);
+                    if (index > -1) {
+                    this.cart_items.splice(index, 1); // 2nd parameter means remove one item only
+                    }
+                 localStorage.setItem('cart_items', JSON.stringify(this.cart_items))
                 Swal.fire(
                 'Deleted!',
                 'Your file has been deleted.',
@@ -212,17 +271,21 @@
                 )
             }
             })
+
         },
          async getProducts(){
              this.loading=true;
              await axios.get('/pos').then((res)=>{
                  this.products=res.data.products;
                  this.categories=res.data.categories;
+                 this.tables=res.data.tables;
                  this.loading=false;
              });
           },
       },
       mounted() {
+          localStorage.getItem('cart_items') ?
+          this.cart_items = JSON.parse(localStorage.getItem('cart_items')) : this.cart_items = [];
           this.getProducts();
       },
    }

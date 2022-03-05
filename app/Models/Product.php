@@ -28,6 +28,6 @@ class Product extends Model
     public function getProducts($request){
         $q=!empty(request('query')) ? request('query') : "";
         $per_page=!empty($request->per_page) ?  $request->per_page  : env('PER_PAGE');
-        return Product::latest()->where('name','LIKE','%'.$q.'%')->with('category:id,name')->paginate((int)$per_page);;
+        return Product::latest()->where('name','LIKE','%'.$q.'%')->with('category:id,name')->paginate((int)$per_page);
     }
 }
