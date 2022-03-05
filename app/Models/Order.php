@@ -23,6 +23,16 @@ class Order extends Model
     {
         return $this->belongsTo(OrderStatus::class, 'order_status_id', 'id');
     }
+
+     /**
+      * Get all of the comments for the Order
+      *
+      * @return \Illuminate\Database\Eloquent\Relations\HasMany
+      */
+     public function items()
+     {
+         return $this->hasMany(OrderItem::class, 'order_id', 'id')->with('product');
+     }
     public function paymentStatus()
     {
         return $this->belongsTo(PaymentStatus::class, 'payment_status_id', 'id');

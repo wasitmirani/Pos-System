@@ -8,7 +8,7 @@
                                 <div class="card-body">
                                     <div class="row d-flex justify-content-center">
                                         <div class="col">
-                                            <p class="text-dark mb-1 fw-semibold">{{item.order_type ? item.order_type : "Other"}}</p>
+                                            <p class="text-dark mb-1 fw-semibold">{{item.order_type ? item.order_type : "Other" }}</p>
                                             <h4 class="font-22 fw-bold">{{item.total}}</h4>
                                             <p class="mb-0 text-truncate text-muted"><span class="text-success"><i class="mdi mdi-checkbox-marked-circle-outline me-1"></i></span> {{item.total}} orders Complete</p>
                                         </div>
@@ -35,7 +35,7 @@
             <div class="text-end">
                <ul class="list-inline">
                   <li class="list-inline-item">
-                     <SearchInput  placeholder="Search By Order No" :apiurl="`/orders/daily?page=${this.page_num}`" @query="isQuery($event)" @loading="isLoading($event)" @reload="getOrders()" @filterdata="filterData($event)" :query_input="query"/>
+                     <SearchInput  placeholder="Search By Order No" :apiurl="`/orders/all?page=${this.page_num}`" @query="isQuery($event)" @loading="isLoading($event)" @reload="getOrders()" @filterdata="filterData($event)" :query_input="query"/>
                   </li>
                   <!-- <li class="list-inline-item">
                      <button type="button" class="btn btn-primary btn-sm"><i class="fas fa-filter"></i></button>
@@ -50,7 +50,7 @@
             </div>
          </div>
          <!--end col-->
-         </div>
+      </div>
        <div class="row">
             <div class="col-lg-12">
                             <div class="card">
@@ -159,7 +159,7 @@ export default {
             return moment.utc(date).local().format('MMMM Do YYYY, h:mm:ss a');
         },
         filterData(data){
-        this.orders = data.daily_orders;
+        this.orders = data.orders;
 
        },
 
@@ -261,9 +261,9 @@ export default {
       async  getOrders(page=1){
         this.page_num=page;
         this.loading=true;
-        const url=`/orders/daily?page=${this.page_num}&query=${this.query}`;
+        const url=`/orders/all?page=${this.page_num}&query=${this.query}`;
          await axios.get(url).then((res)=>{
-                this.orders=res.data.daily_orders;
+                this.orders=res.data.orders;
                 this.order_info=res.data.order_info;
                 this.loading=false;
             });

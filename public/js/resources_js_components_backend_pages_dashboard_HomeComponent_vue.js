@@ -39,15 +39,201 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
 /* harmony import */ var _components_breadcrumbComponent_vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../components/breadcrumbComponent.vue */ "./resources/js/components/backend/components/breadcrumbComponent.vue");
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   components: {
     breadcrumb: _components_breadcrumbComponent_vue__WEBPACK_IMPORTED_MODULE_0__["default"]
   },
+  data: function data() {
+    return {
+      orders_by_date: [],
+      orders_stat: [],
+      recent_orders: []
+    };
+  },
   setup: function setup() {
     return {
       title: 'How To Install Vue 3 in Laravel 8 From Scratch'
     };
+  },
+  methods: {
+    loadDashboardOrderBy: function loadDashboardOrderBy() {
+      var options = _defineProperty({
+        chart: {
+          height: 340,
+          type: 'bar',
+          toolbar: {
+            show: false
+          }
+        },
+        colors: ['#2a76f4'],
+        dataLabels: {
+          enabled: false
+        },
+        plotOptions: {
+          bar: {
+            horizontal: false,
+            columnWidth: '30%'
+          }
+        },
+        stroke: {
+          show: false,
+          width: 2
+        },
+        series: [{
+          name: 'Orders',
+          data: this.orders_by_date.map(function (item) {
+            return item.total;
+          })
+        }],
+        labels: this.orders_by_date.map(function (x) {
+          return x.date;
+        }),
+        yaxis: {
+          labels: {
+            offsetX: -12,
+            offsetY: 0
+          }
+        },
+        grid: {
+          borderColor: '#e0e6ed',
+          strokeDashArray: 4,
+          xaxis: {
+            lines: {
+              show: false
+            }
+          },
+          yaxis: {
+            lines: {
+              show: true
+            }
+          }
+        },
+        legend: {
+          show: false
+        },
+        tooltip: {
+          marker: {
+            show: true
+          },
+          x: {
+            show: false
+          }
+        }
+      }, "yaxis", {
+        labels: {
+          formatter: function formatter(value) {
+            return "" + value;
+          }
+        }
+      });
+
+      var chart = new ApexCharts(document.querySelector("#Revenu_Status"), options);
+      chart.render();
+    },
+    getAnalytics: function getAnalytics() {
+      var _this = this;
+
+      axios.get('/dashboard/analytics').then(function (res) {
+        _this.orders_by_date = res.data.orders_by_date;
+        _this.orders_stat = res.data.order_stat;
+        _this.recent_orders = res.data.recent_orders;
+
+        _this.loadDashboardOrderBy();
+      });
+    },
+    dateFormat: function dateFormat(date) {
+      return moment.utc(date).local().format('MMMM Do YYYY, h:mm:ss a');
+    },
+    openPrint: function openPrint(item) {
+      axios.get('/pos/order/update-status/' + item.id).then(function (res) {
+        var url = window.location.origin + "/customer/print/" + res.data.order.id;
+        console.log("url", url);
+        window.open(url, '_blank').focus();
+      });
+    },
+    deleted: function deleted(item) {
+      var _this2 = this;
+
+      Swal.fire({
+        title: 'Are you sure?',
+        text: "You won't be able to revert this!",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Yes, delete it!'
+      }).then(function (result) {
+        if (result.isConfirmed) {
+          axios.get('/pos/order/delete/' + item.id).then(function (response) {
+            Swal.fire('Deleted!', 'Your file has been deleted.', 'success');
+
+            _this2.getOrders();
+          });
+        }
+      });
+    },
+    paymentStatus: function paymentStatus(value) {
+      switch (value) {
+        case 1:
+          return "bg-soft-pink";
+          break;
+
+        case 2:
+          return "bg-soft-success";
+          break;
+
+        default:
+          return "bg-soft-pink";
+          break;
+      }
+    },
+    orderStatus: function orderStatus(value) {
+      switch (value) {
+        case 1:
+          return "bg-soft-purple";
+          break;
+
+        case 2:
+          return "bg-soft-success";
+          break;
+
+        case 3:
+          return "bg-soft-purple";
+          break;
+
+        case 4:
+          return "bg-soft-success";
+          break;
+
+        default:
+          return "bg-soft-success";
+          break;
+      }
+    },
+    orderType: function orderType(value) {
+      switch (value) {
+        case 'delivery':
+          return "<a role='button' class='badge bg-primary'>delivery</a>";
+          break;
+
+        case 'takeaway':
+          return "<a role='button' class='badge bg-warning'>takeaway</a>";
+          break;
+
+        case 'dining':
+          return "<a role='button' class='badge bg-success'>dining</a>";
+          break;
+
+        default:
+          break;
+      }
+    }
+  },
+  mounted: function mounted() {
+    this.getAnalytics();
   }
 });
 
@@ -146,19 +332,296 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm-bundler.js");
 
+var _hoisted_1 = {
+  "class": "row"
+};
+var _hoisted_2 = {
+  "class": "col-lg-4"
+};
+var _hoisted_3 = {
+  "class": "card"
+};
+var _hoisted_4 = {
+  "class": "card-body"
+};
+var _hoisted_5 = {
+  "class": "row"
+};
+var _hoisted_6 = {
+  "class": "col align-self-center"
+};
+var _hoisted_7 = {
+  "class": "media"
+};
 
-var _hoisted_1 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createStaticVNode)("<div class=\"row\"><div class=\"col-lg-4\"><div class=\"card\"><div class=\"card-body\"><div class=\"row\"><div class=\"col align-self-center\"><div class=\"media\"><img src=\"assets/images/logos/money-beg.png\" alt=\"\" class=\"align-self-center\" height=\"40\"><div class=\"media-body align-self-center ms-3\"><h6 class=\"m-0 font-24 fw-bold\">$1850.00</h6><p class=\"text-muted mb-0\">Total Revenue</p></div><!--end media body--></div><!--end media--></div><!--end col--><div class=\"col-auto align-self-center\"><div class=\"\"><div id=\"Revenu_Status_bar\" class=\"apex-charts mb-n4\"></div></div></div><!--end col--></div><!--end row--></div><!--end card-body--></div><!--end card--><div class=\"row\"><div class=\"col-12 col-lg-6\"><div class=\"card\"><div class=\"card-body\"><div class=\"row align-items-center\"><div class=\"col text-center\"><span class=\"h5 fw-bold\">$24,500</span><h6 class=\"text-uppercase text-muted mt-2 m-0 font-11\">Today&#39;s Revenue</h6></div><!--end col--></div><!-- end row --></div><!--end card-body--></div><!--end card-body--></div><!--end col--><div class=\"col-12 col-lg-6\"><div class=\"card\"><div class=\"card-body\"><div class=\"row align-items-center\"><div class=\"col text-center\"><span class=\"h5 fw-bold\">520</span><h6 class=\"text-uppercase text-muted mt-2 m-0 font-11\">Today&#39;s New Order</h6></div><!--end col--></div><!-- end row --></div><!--end card-body--></div><!--end card-body--></div><!--end col--><div class=\"col-12 col-lg-6\"><div class=\"card\"><div class=\"card-body\"><div class=\"row align-items-center\"><div class=\"col text-center\"><span class=\"h5 fw-bold\">82.8%</span><h6 class=\"text-uppercase text-muted mt-2 m-0 font-11\">Conversion Rate</h6></div><!--end col--></div><!-- end row --></div><!--end card-body--></div><!--end card-body--></div><!--end col--><div class=\"col-12 col-lg-6\"><div class=\"card\"><div class=\"card-body\"><div class=\"row align-items-center\"><div class=\"col text-center\"><span class=\"h5 fw-bold\">$80.5</span><h6 class=\"text-uppercase text-muted mt-2 m-0 font-11\">Avg. Value</h6></div><!--end col--></div><!-- end row --></div><!--end card-body--></div><!--end card--></div><!--end col--></div><!--end row--><div class=\"card\"><div class=\"card-header\"><div class=\"row align-items-center\"><div class=\"col\"><h4 class=\"card-title\">View Invoices</h4></div><!--end col--></div><!--end row--></div><!--end card-header--><div class=\"card-body\"><div class=\"row align-items-center\"><div class=\"col-auto\"><i class=\"las la-file-invoice-dollar font-36 text-muted\"></i></div><!--end col--><div class=\"col\"><div class=\"input-group\"><select class=\"form-select\"><option selected>--- Select ---</option><option value=\"Jan 2021\">Jan 2021</option><option value=\"Feb 2021\">Feb 2021</option><option value=\"Mar 2021\">Mar 2021</option><option value=\"Apr 2021\">Apr 2021</option></select><button class=\"btn btn-soft-primary btn-sm\" type=\"button\"><i class=\"las la-search\"></i></button></div></div><!--end col--></div><!--end row--></div><!--end card-body--></div><!--end card--></div><!-- end col--><div class=\"col-lg-8\"><div class=\"card\"><div class=\"card-header\"><div class=\"row align-items-center\"><div class=\"col\"><h4 class=\"card-title\">Revenu Status</h4></div><!--end col--><div class=\"col-auto\"><div class=\"dropdown\"><a href=\"#\" class=\"btn btn-sm btn-outline-light dropdown-toggle\" data-bs-toggle=\"dropdown\" aria-haspopup=\"true\" aria-expanded=\"false\"> This Month<i class=\"las la-angle-down ms-1\"></i></a><div class=\"dropdown-menu dropdown-menu-end\"><a class=\"dropdown-item\" href=\"#\">Today</a><a class=\"dropdown-item\" href=\"#\">Last Week</a><a class=\"dropdown-item\" href=\"#\">Last Month</a><a class=\"dropdown-item\" href=\"#\">This Year</a></div></div></div><!--end col--></div><!--end row--></div><!--end card-header--><div class=\"card-body\"><div class=\"\"><div id=\"Revenu_Status\" class=\"apex-charts\"></div></div></div><!--end card-body--></div><!--end card--></div><!-- end col--></div>", 1);
+var _hoisted_8 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("img", {
+  src: "assets/images/logos/money-beg.png",
+  alt: "",
+  "class": "align-self-center",
+  height: "40"
+}, null, -1
+/* HOISTED */
+);
 
-var _hoisted_2 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createStaticVNode)("<div class=\"row\"><div class=\"col-lg-2 col-md-4\"><div class=\"card\"><div class=\"card-body\"><img src=\"assets/images/products/04.png\" alt=\"\" class=\"img-fluid px-2 px-lg-5\"><hr class=\"hr-dashed\"><div class=\"d-flex justify-content-between\"><div><a href=\"#\" class=\"font-15 fw-bold text-primary\">N95 Mask</a><p class=\"text-muted mb-0 fw-semibold font-13\">Covid Safety</p></div><div class=\"align-self-center\"><h6 class=\"fw-bold font-22 m-0\">$10</h6></div></div></div><!--end card-body--></div><!--end card--></div><!--end col--><div class=\"col-lg-2 col-md-4\"><div class=\"card\"><div class=\"card-body\"><img src=\"assets/images/products/01.png\" alt=\"\" class=\"img-fluid px-2 px-lg-5\"><hr class=\"hr-dashed\"><div class=\"d-flex justify-content-between\"><div><a href=\"#\" class=\"font-15 fw-bold text-primary\">White Table Camera</a><p class=\"text-muted mb-0 fw-semibold font-13\">Security</p></div><div class=\"align-self-center\"><h6 class=\"fw-bold font-22 m-0\">$99</h6></div></div></div><!--end card-body--></div><!--end card--></div><!--end col--><div class=\"col-lg-2 col-md-4\"><div class=\"card\"><div class=\"card-body\"><img src=\"assets/images/products/02.png\" alt=\"\" class=\"img-fluid px-2 px-lg-5\"><hr class=\"hr-dashed\"><div class=\"d-flex justify-content-between\"><div><a href=\"#\" class=\"font-15 fw-bold text-primary\">New Colorfull Shoes</a><p class=\"text-muted mb-0 fw-semibold font-13\">Fashion &amp; Life Style</p></div><div class=\"align-self-center\"><h6 class=\"fw-bold font-22 m-0\">$89</h6></div></div></div><!--end card-body--></div><!--end card--></div><!--end col--><div class=\"col-lg-2 col-md-4\"><div class=\"card\"><div class=\"card-body\"><img src=\"assets/images/products/03.png\" alt=\"\" class=\"img-fluid px-2 px-lg-5\"><hr class=\"hr-dashed\"><div class=\"d-flex justify-content-between\"><div><a href=\"#\" class=\"font-15 fw-bold text-primary\">Imported VR Box</a><p class=\"text-muted mb-0 fw-semibold font-13\">Entertainment</p></div><div class=\"align-self-center\"><h6 class=\"fw-bold font-22 m-0\">$49</h6></div></div></div><!--end card-body--></div><!--end card--></div><!--end col--><div class=\"col-lg-2 col-md-4\"><div class=\"card\"><div class=\"card-body\"><img src=\"assets/images/products/05.png\" alt=\"\" class=\"img-fluid px-2 px-lg-5\"><hr class=\"hr-dashed\"><div class=\"d-flex justify-content-between\"><div><a href=\"#\" class=\"font-15 fw-bold text-primary\">Fever Gun</a><p class=\"text-muted mb-0 fw-semibold font-13\">Electric</p></div><div class=\"align-self-center\"><h6 class=\"fw-bold font-22 m-0\">$29</h6></div></div></div><!--end card-body--></div><!--end card--></div><!--end col--><div class=\"col-lg-2 col-md-4\"><div class=\"card\"><div class=\"card-body\"><img src=\"assets/images/products/06.png\" alt=\"\" class=\"img-fluid px-2 px-lg-5\"><hr class=\"hr-dashed\"><div class=\"d-flex justify-content-between\"><div><a href=\"#\" class=\"font-15 fw-bold text-primary\">Hand Bag</a><p class=\"text-muted mb-0 fw-semibold font-13\">Fashion &amp; Life Style</p></div><div class=\"align-self-center\"><h6 class=\"fw-bold font-22 m-0\">$69</h6></div></div></div><!--end card-body--></div><!--end card--></div><!--end col--></div>", 1);
+var _hoisted_9 = {
+  "class": "media-body align-self-center ms-3"
+};
+var _hoisted_10 = {
+  "class": "m-0 font-24 fw-bold"
+};
 
-var _hoisted_3 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createStaticVNode)("<div class=\"row\"><div class=\"col-lg-6\"><div class=\"card\"><div class=\"card-header\"><div class=\"row align-items-center\"><div class=\"col\"><h4 class=\"card-title\">Earnings Reports</h4></div><!--end col--></div><!--end row--></div><!--end card-header--><div class=\"card-body\"><div class=\"table-responsive\"><table class=\"table mb-0\"><thead class=\"thead-light\"><tr><th class=\"border-top-0\">Date</th><th class=\"border-top-0\">Item Count</th><th class=\"border-top-0\">Text</th><th class=\"border-top-0\">Earnings</th></tr><!--end tr--></thead><tbody><tr><td>01 January</td><td>50</td><td class=\"text-danger\">-$70</td><td>$15,000</td></tr><!--end tr--><tr><td>02 January</td><td>25</td><td>-</td><td>$9,500</td></tr><!--end tr--><tr><td>03 January</td><td>65</td><td class=\"text-danger\">-$115</td><td>$35,000</td></tr><!--end tr--><tr><td>04 January</td><td>20</td><td>-</td><td>$8,500</td></tr><!--end tr--><tr><td>05 January</td><td>40</td><td class=\"text-danger\">-$60</td><td>$12,000</td></tr><!--end tr--><tr><td>06 January</td><td>45</td><td class=\"text-danger\">-$65</td><td>$13,500</td></tr><!--end tr--><tr><td>07 January</td><td>30</td><td>-</td><td>$15,500</td></tr><!--end tr--></tbody></table><!--end table--></div><!--end /div--></div><!--end card-body--></div><!--end card--></div><!--end col--><div class=\"col-lg-6\"><div class=\"card\"><div class=\"card-header\"><div class=\"row align-items-center\"><div class=\"col\"><h4 class=\"card-title\">Most Populer Products</h4></div><!--end col--></div><!--end row--></div><!--end card-header--><div class=\"card-body\"><div class=\"table-responsive\"><table class=\"table mb-0\"><thead class=\"thead-light\"><tr><th class=\"border-top-0\">Product</th><th class=\"border-top-0\">Price</th><th class=\"border-top-0\">Sell</th><th class=\"border-top-0\">Status</th><th class=\"border-top-0\">Action</th></tr><!--end tr--></thead><tbody><tr><td><div class=\"media\"><img src=\"assets/images/products/01.png\" height=\"30\" class=\"me-3 align-self-center rounded\" alt=\"...\"><div class=\"media-body align-self-center\"><h6 class=\"m-0\">Unikit Camera EDM 5D(White)</h6><a href=\"#\" class=\"font-12 text-primary\">ID: A3652</a></div><!--end media body--></div></td><td>$50 <del class=\"text-muted font-10\">$70</del></td><td>450 <small class=\"text-muted\">(550)</small></td><td><span class=\"badge badge-soft-warning px-2\">Stock</span></td><td><a href=\"#\"><i class=\"las la-pen text-secondary font-18\"></i></a><a href=\"#\"><i class=\"las la-trash-alt text-secondary font-18\"></i></a></td></tr><!--end tr--><tr><td><div class=\"media\"><img src=\"assets/images/products/02.png\" height=\"30\" class=\"me-3 align-self-center rounded\" alt=\"...\"><div class=\"media-body align-self-center\"><h6 class=\"m-0\">Unikit Shoes Max-Zon</h6><a href=\"#\" class=\"font-12 text-primary\">ID: A5002</a></div><!--end media body--></div></td><td>$99 <del class=\"text-muted font-10\">$150</del></td><td>750 <small class=\"text-muted\">(00)</small></td><td><span class=\"badge badge-soft-primary px-2\">Out of Stock</span></td><td><a href=\"#\"><i class=\"las la-pen text-secondary font-18\"></i></a><a href=\"#\"><i class=\"las la-trash-alt text-secondary font-18\"></i></a></td></tr><!--end tr--><tr><td><div class=\"media\"><img src=\"assets/images/products/04.png\" height=\"30\" class=\"me-3 align-self-center rounded\" alt=\"...\"><div class=\"media-body align-self-center\"><h6 class=\"m-0\">Unikit Mask N99 [ISI]</h6><a href=\"#\" class=\"font-12 text-primary\">ID: A6598</a></div><!--end media body--></div></td><td>$199 <del class=\"text-muted font-10\">$250</del></td><td>280 <small class=\"text-muted\">(220)</small></td><td><span class=\"badge badge-soft-warning px-2\">Stock</span></td><td><a href=\"#\"><i class=\"las la-pen text-secondary font-18\"></i></a><a href=\"#\"><i class=\"las la-trash-alt text-secondary font-18\"></i></a></td></tr><!--end tr--><tr><td><div class=\"media\"><img src=\"assets/images/products/07.png\" height=\"30\" class=\"me-3 align-self-center rounded\" alt=\"...\"><div class=\"media-body align-self-center\"><h6 class=\"m-0\">Unikit Bag (Blue)</h6><a href=\"#\" class=\"font-12 text-primary\">ID: A9547</a></div><!--end media body--></div></td><td>$40 <del class=\"text-muted font-10\">$49</del></td><td>500 <small class=\"text-muted\">(1000)</small></td><td><span class=\"badge badge-soft-primary px-2\">Out of Stock</span></td><td><a href=\"#\"><i class=\"las la-pen text-secondary font-18\"></i></a><a href=\"#\"><i class=\"las la-trash-alt text-secondary font-18\"></i></a></td></tr><!--end tr--><tr><td><div class=\"media\"><img src=\"assets/images/products/05.png\" height=\"30\" class=\"me-3 align-self-center rounded\" alt=\"...\"><div class=\"media-body align-self-center\"><h6 class=\"m-0\">Unikit Fever Gun</h6><a href=\"#\" class=\"font-12 text-primary\">ID: A2047</a></div><!--end media body--></div></td><td>$80 <del class=\"text-muted font-10\">$59</del></td><td>800 <small class=\"text-muted\">(2000)</small></td><td><span class=\"badge badge-soft-primary px-2\">Out of Stock</span></td><td><a href=\"#\"><i class=\"las la-pen text-secondary font-18\"></i></a><a href=\"#\"><i class=\"las la-trash-alt text-secondary font-18\"></i></a></td></tr><!--end tr--></tbody></table><!--end table--></div><!--end /div--></div><!--end card-body--></div><!--end card--></div><!--end col--></div>", 1);
+var _hoisted_11 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("p", {
+  "class": "text-muted mb-0"
+}, "Total Revenue", -1
+/* HOISTED */
+);
 
+var _hoisted_12 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
+  "class": "col-auto align-self-center"
+}, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
+  "class": ""
+}, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
+  id: "Revenu_Status_bar",
+  "class": "apex-charts mb-n4"
+})])], -1
+/* HOISTED */
+);
+
+var _hoisted_13 = {
+  "class": "row"
+};
+var _hoisted_14 = {
+  "class": "col-12 col-lg-6"
+};
+var _hoisted_15 = {
+  "class": "card"
+};
+var _hoisted_16 = {
+  "class": "card-body"
+};
+var _hoisted_17 = {
+  "class": "row align-items-center"
+};
+var _hoisted_18 = {
+  "class": "col text-center"
+};
+var _hoisted_19 = {
+  "class": "h5 fw-bold"
+};
+
+var _hoisted_20 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("h6", {
+  "class": "text-uppercase text-muted mt-2 m-0 font-11"
+}, "Today's Revenue", -1
+/* HOISTED */
+);
+
+var _hoisted_21 = {
+  "class": "col-12 col-lg-6"
+};
+var _hoisted_22 = {
+  "class": "card"
+};
+var _hoisted_23 = {
+  "class": "card-body"
+};
+var _hoisted_24 = {
+  "class": "row align-items-center"
+};
+var _hoisted_25 = {
+  "class": "col text-center"
+};
+var _hoisted_26 = {
+  "class": "h5 fw-bold"
+};
+
+var _hoisted_27 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("h6", {
+  "class": "text-uppercase text-muted mt-2 m-0 font-11"
+}, "Today's New Order", -1
+/* HOISTED */
+);
+
+var _hoisted_28 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createStaticVNode)("<div class=\"col-12 col-lg-6\"><div class=\"card\"><div class=\"card-body\"><div class=\"row align-items-center\"><div class=\"col text-center\"><span class=\"h5 fw-bold\">82.8%</span><h6 class=\"text-uppercase text-muted mt-2 m-0 font-11\">All Orders Rate</h6></div><!--end col--></div><!-- end row --></div><!--end card-body--></div><!--end card-body--></div>", 1);
+
+var _hoisted_29 = {
+  "class": "col-12 col-lg-6"
+};
+var _hoisted_30 = {
+  "class": "card"
+};
+var _hoisted_31 = {
+  "class": "card-body"
+};
+var _hoisted_32 = {
+  "class": "row align-items-center"
+};
+var _hoisted_33 = {
+  "class": "col text-center"
+};
+var _hoisted_34 = {
+  "class": "h5 fw-bold"
+};
+
+var _hoisted_35 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("h6", {
+  "class": "text-uppercase text-muted mt-2 m-0 font-11"
+}, "All Orders", -1
+/* HOISTED */
+);
+
+var _hoisted_36 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createStaticVNode)("<div class=\"card\"><div class=\"card-header\"><div class=\"row align-items-center\"><div class=\"col\"><h4 class=\"card-title\">View Orders</h4></div><!--end col--></div><!--end row--></div><!--end card-header--><div class=\"card-body\"><div class=\"row align-items-center\"><div class=\"col-auto\"><i class=\"las la-file-invoice-dollar font-36 text-muted\"></i></div><!--end col--><div class=\"col\"><div class=\"input-group\"><select class=\"form-select\"><option selected>--- Select ---</option><option value=\"Jan 2021\">Jan 2022</option><option value=\"Feb 2021\">Feb 2022</option><option value=\"Mar 2021\">Mar 2022</option><!-- &lt;option value=&quot;Apr 2021&quot;&gt;Apr 2021&lt;/option&gt; --></select><button class=\"btn btn-soft-primary btn-sm\" type=\"button\"><i class=\"las la-search\"></i></button></div></div><!--end col--></div><!--end row--></div><!--end card-body--></div>", 1);
+
+var _hoisted_37 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createStaticVNode)("<div class=\"col-lg-8\"><div class=\"card\"><div class=\"card-header\"><div class=\"row align-items-center\"><div class=\"col\"><h4 class=\"card-title\">Orders By Date</h4></div><!--end col--><div class=\"col-auto\"><div class=\"dropdown\"><!-- &lt;a href=&quot;#&quot; class=&quot;btn btn-sm btn-outline-light dropdown-toggle&quot; data-bs-toggle=&quot;dropdown&quot; aria-haspopup=&quot;true&quot; aria-expanded=&quot;false&quot;&gt;\n                                                   This Month&lt;i class=&quot;las la-angle-down ms-1&quot;&gt;&lt;/i&gt;\n                                                &lt;/a&gt; --><!-- &lt;div class=&quot;dropdown-menu dropdown-menu-end&quot;&gt;\n                                                    &lt;a class=&quot;dropdown-item&quot; href=&quot;#&quot;&gt;Today&lt;/a&gt;\n                                                    &lt;a class=&quot;dropdown-item&quot; href=&quot;#&quot;&gt;Last Week&lt;/a&gt;\n                                                    &lt;a class=&quot;dropdown-item&quot; href=&quot;#&quot;&gt;Last Month&lt;/a&gt;\n                                                    &lt;a class=&quot;dropdown-item&quot; href=&quot;#&quot;&gt;This Year&lt;/a&gt;\n                                                &lt;/div&gt; --></div></div><!--end col--></div><!--end row--></div><!--end card-header--><div class=\"card-body\"><div class=\"\"><div id=\"Revenu_Status\" class=\"apex-charts\"></div></div></div><!--end card-body--></div><!--end card--></div>", 1);
+
+var _hoisted_38 = {
+  "class": "row"
+};
+var _hoisted_39 = {
+  "class": "col-lg-12"
+};
+var _hoisted_40 = {
+  "class": "card"
+};
+
+var _hoisted_41 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
+  "class": "card-header"
+}, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
+  "class": "row align-items-center"
+}, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
+  "class": "col"
+}, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("h4", {
+  "class": "card-title"
+}, "Today All Orders")]), /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("end col")]), /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("end row")], -1
+/* HOISTED */
+);
+
+var _hoisted_42 = {
+  "class": "card-body"
+};
+var _hoisted_43 = {
+  "class": "table-responsive"
+};
+var _hoisted_44 = {
+  "class": "table mb-0"
+};
+
+var _hoisted_45 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("thead", {
+  "class": "thead-light"
+}, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("tr", null, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("th", {
+  "class": "border-top-0"
+}, "Order No"), /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("th", {
+  "class": "border-top-0"
+}, "Table No"), /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("th", {
+  "class": "border-top-0"
+}, "Status"), /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("th", {
+  "class": "border-top-0"
+}, "Type"), /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("th", {
+  "class": "border-top-0"
+}, "Payment"), /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("th", {
+  "class": "border-top-0"
+}, "Total"), /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("th", {
+  "class": "border-top-0"
+}, "Created"), /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("th", {
+  "class": "border-top-0"
+}, "Action")]), /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("end tr")], -1
+/* HOISTED */
+);
+
+var _hoisted_46 = {
+  "class": "media"
+};
+var _hoisted_47 = {
+  "class": "media-body align-self-center"
+};
+var _hoisted_48 = {
+  "class": "m-0"
+};
+var _hoisted_49 = {
+  href: "#",
+  "class": "font-12 text-primary"
+};
+var _hoisted_50 = ["innerHTML"];
+
+var _hoisted_51 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)(" Rs. ");
+
+var _hoisted_52 = ["onClick"];
+
+var _hoisted_53 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("i", {
+  "class": "las la-print text-secondary font-18"
+}, null, -1
+/* HOISTED */
+);
+
+var _hoisted_54 = [_hoisted_53];
+var _hoisted_55 = ["onClick"];
+
+var _hoisted_56 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("i", {
+  "class": "las la-trash-alt text-secondary font-18"
+}, null, -1
+/* HOISTED */
+);
+
+var _hoisted_57 = [_hoisted_56];
 function render(_ctx, _cache, $props, $setup, $data, $options) {
+  var _this = this;
+
   var _component_breadcrumb = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("breadcrumb");
+
+  var _component_AvatarComponent = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("AvatarComponent");
 
   return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" Page-Title "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_breadcrumb, {
     active_name: "Dashboard"
-  }), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" end page title end breadcrumb "), _hoisted_1, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("end row"), _hoisted_2, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("end row"), _hoisted_3, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("end row")]);
+  }), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" end page title end breadcrumb "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_1, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_2, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_3, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_4, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_5, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_6, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_7, [_hoisted_8, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_9, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("h6", _hoisted_10, "Rs." + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($data.orders_stat.total_revenue), 1
+  /* TEXT */
+  ), _hoisted_11]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("end media body")]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("end media")]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("end col"), _hoisted_12, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("end col")]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("end row")]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("end card-body")]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("end card"), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_13, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_14, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_15, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_16, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_17, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_18, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", _hoisted_19, "Rs." + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($data.orders_stat.today_revenue), 1
+  /* TEXT */
+  ), _hoisted_20]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("end col")]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" end row ")]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("end card-body")]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("end card-body")]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("end col"), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_21, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_22, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_23, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_24, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_25, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", _hoisted_26, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($data.recent_orders.total), 1
+  /* TEXT */
+  ), _hoisted_27]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("end col")]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" end row ")]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("end card-body")]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("end card-body")]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("end col"), _hoisted_28, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("end col"), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_29, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_30, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_31, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_32, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_33, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", _hoisted_34, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($data.orders_stat.total_orders), 1
+  /* TEXT */
+  ), _hoisted_35]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("end col")]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" end row ")]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("end card-body")]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("end card")]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("end col")]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("end row"), _hoisted_36, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("end card")]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" end col"), _hoisted_37, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" end col")]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("end row"), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_38, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_39, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_40, [_hoisted_41, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("end card-header"), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_42, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_43, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("table", _hoisted_44, [_hoisted_45, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("tbody", null, [((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)($data.recent_orders.data, function (item) {
+    return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("tr", {
+      key: item.id
+    }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("td", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_46, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_AvatarComponent, {
+      name: '' + item.id
+    }, null, 8
+    /* PROPS */
+    , ["name"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_47, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("h6", _hoisted_48, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("a", _hoisted_49, "OrderNo: " + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(item.order_no), 1
+    /* TEXT */
+    )])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("end media body")])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("td", null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(item.table ? item.table.name : "N/A"), 1
+    /* TEXT */
+    ), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("td", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", {
+      "class": (0,vue__WEBPACK_IMPORTED_MODULE_0__.normalizeClass)('badge rounded-pill ' + $options.orderStatus(item.order_status_id))
+    }, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(item.order_status.name), 3
+    /* TEXT, CLASS */
+    )]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("td", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
+      innerHTML: _this.orderType(item.order_type)
+    }, null, 8
+    /* PROPS */
+    , _hoisted_50), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" <p :inner-html.prop=\"\"></p> ")]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("td", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", {
+      "class": (0,vue__WEBPACK_IMPORTED_MODULE_0__.normalizeClass)('badge rounded-pill ' + $options.paymentStatus(item.payment_status_id))
+    }, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(item.payment_status.name), 3
+    /* TEXT, CLASS */
+    )]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("td", null, [_hoisted_51, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("strong", null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(item.total), 1
+    /* TEXT */
+    )]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("td", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("small", null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($options.dateFormat(item.created_at)), 1
+    /* TEXT */
+    )]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("td", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("a", {
+      role: "button",
+      onClick: function onClick($event) {
+        return $options.openPrint(item);
+      }
+    }, _hoisted_54, 8
+    /* PROPS */
+    , _hoisted_52), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("a", {
+      role: "button",
+      onClick: function onClick($event) {
+        return $options.deleted(item);
+      }
+    }, _hoisted_57, 8
+    /* PROPS */
+    , _hoisted_55)])]);
+  }), 128
+  /* KEYED_FRAGMENT */
+  )), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("end tr")])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("end table")]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("end /div")]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("end card-body")]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("end card")]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("end col")])]);
 }
 
 /***/ }),

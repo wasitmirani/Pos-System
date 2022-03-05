@@ -16,7 +16,7 @@ class HelperComponent
                 "single_link" => setSingleLink("Pos", "printer", "pos-view", "/pos-system"),
             ],
             [
-                "single_link" => setSingleLink("Cooking Status", "bell", "kitchen-view", "/kitchen-status"),
+                "single_link" => setSingleLink("Cooking Status", "bell", "kitchen-view", "/cooking-orders"),
             ],
             [
                 "menu" => [
@@ -36,12 +36,7 @@ class HelperComponent
                             "orders-view",
                             "/orders",
                         ),
-                        setSubMenu(
-                            "Table Bookings",
-                            null,
-                            "table-bookings-view",
-                            "/table-bookings",
-                        ),
+
 
 
                        ]
@@ -88,9 +83,6 @@ class HelperComponent
             ],
             [
                 "single_link" => setSingleLink("Tables", "link", "tables-view", "/tables"),
-            ],
-            [
-                "single_link" => setSingleLink("Log out", "log-out", "services-view", "/logout"),
             ],
 
         ];

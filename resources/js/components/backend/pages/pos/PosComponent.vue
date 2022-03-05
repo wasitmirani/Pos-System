@@ -15,7 +15,7 @@
                                     " {{this.query}} "
                                 </div>
                  </div>
-                  <div class="row" v-else>
+                  <div class="row" >
                         <div class="d-flex justify-content-center" v-if="loading">
                      <!-- <strong>Loading...</strong> -->
                      <div class="spinner-border text-dark" role="status"></div>
@@ -26,7 +26,8 @@
                            <div class="card-body" >
                               <span class="badge bg-dark">{{item.category.name}}</span>
                               <div class="text-center">
-                                 <img :src="item.thumbnail" alt="" height="100">
+                                 <img :src="item.thumbnail" alt="" class="thumb-md rounded-circle" >
+
                               </div>
                               <!--end media-->
                               <div class=" ms-2">
@@ -213,6 +214,9 @@
                 timeout: 1000
              });
                 localStorage.setItem('cart_items', JSON.stringify(this.cart_items));
+               const url= window.location.origin+"/kitchen/print/"+res.data.order.id;
+               console.log("url",url);
+                 window.open(url, '_blank').focus();
             });
         },
         addCart(item){

@@ -46,6 +46,14 @@ const routes = [
         path: "/daily-orders", component: () => setComponent("order/DailyOrders"), name: "daily-orders",
         meta: { permissions: "daily-orders-view" }
     },
+    {
+        path: "/cooking-orders", component: () => setComponent("order/CookingOrders"), name: "cooking-orders",
+        meta: { permissions: "cooking-orders-view" }
+    },
+    {
+        path: "/orders", component: () => setComponent("order/Orders"), name: "orders",
+        meta: { permissions: "orders-view" }
+    },
 
 
 

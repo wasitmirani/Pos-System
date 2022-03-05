@@ -23213,6 +23213,24 @@ var routes = [{
   meta: {
     permissions: "daily-orders-view"
   }
+}, {
+  path: "/cooking-orders",
+  component: function component() {
+    return setComponent("order/CookingOrders");
+  },
+  name: "cooking-orders",
+  meta: {
+    permissions: "cooking-orders-view"
+  }
+}, {
+  path: "/orders",
+  component: function component() {
+    return setComponent("order/Orders");
+  },
+  name: "orders",
+  meta: {
+    permissions: "orders-view"
+  }
 }];
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ((0,vue_router__WEBPACK_IMPORTED_MODULE_0__.createRouter)({
   history: (0,vue_router__WEBPACK_IMPORTED_MODULE_0__.createWebHistory)(),
@@ -81017,6 +81035,16 @@ var map = {
 		9,
 		"resources_js_components_backend_pages_error_404Component_vue"
 	],
+	"./components/backend/pages/order/CookingOrdersComponent": [
+		"./resources/js/components/backend/pages/order/CookingOrdersComponent.vue",
+		9,
+		"resources_js_components_backend_pages_order_CookingOrdersComponent_vue"
+	],
+	"./components/backend/pages/order/CookingOrdersComponent.vue": [
+		"./resources/js/components/backend/pages/order/CookingOrdersComponent.vue",
+		9,
+		"resources_js_components_backend_pages_order_CookingOrdersComponent_vue"
+	],
 	"./components/backend/pages/order/DailyOrdersComponent": [
 		"./resources/js/components/backend/pages/order/DailyOrdersComponent.vue",
 		9,
@@ -81026,6 +81054,16 @@ var map = {
 		"./resources/js/components/backend/pages/order/DailyOrdersComponent.vue",
 		9,
 		"resources_js_components_backend_pages_order_DailyOrdersComponent_vue"
+	],
+	"./components/backend/pages/order/OrdersComponent": [
+		"./resources/js/components/backend/pages/order/OrdersComponent.vue",
+		9,
+		"resources_js_components_backend_pages_order_OrdersComponent_vue"
+	],
+	"./components/backend/pages/order/OrdersComponent.vue": [
+		"./resources/js/components/backend/pages/order/OrdersComponent.vue",
+		9,
+		"resources_js_components_backend_pages_order_OrdersComponent_vue"
 	],
 	"./components/backend/pages/pos/PosComponent": [
 		"./resources/js/components/backend/pages/pos/PosComponent.vue",
@@ -82386,7 +82424,7 @@ module.exports = JSON.parse('{"name":"axios","version":"0.21.4","description":"P
 /******/ 		// This function allow to reference async chunks
 /******/ 		__webpack_require__.u = (chunkId) => {
 /******/ 			// return url for filenames not based on template
-/******/ 			if ({"resources_js_components_backend_components_AlertComponent_vue":1,"resources_js_components_backend_components_SearchInput_vue":1,"resources_js_components_backend_components_TableFooterComponent_vue":1,"resources_js_components_backend_components_breadcrumbComponent_vue":1,"resources_js_components_backend_pages_category_CategoriesComponent_vue":1,"resources_js_components_backend_pages_category_CategoriesTable_vue":1,"resources_js_components_backend_pages_category_CategoryForm_vue":1,"resources_js_components_backend_pages_dashboard_HomeComponent_vue":1,"resources_js_components_backend_pages_error_404Component_vue":1,"resources_js_components_backend_pages_order_DailyOrdersComponent_vue":1,"resources_js_components_backend_pages_pos_PosComponent_vue":1,"resources_js_components_backend_pages_product_ProductForm_vue":1,"resources_js_components_backend_pages_product_ProductTable_vue":1,"resources_js_components_backend_pages_product_ProductsComponent_vue":1,"resources_js_components_backend_pages_table_TableForm_vue":1,"resources_js_components_backend_pages_table_TablesComponent_vue":1,"resources_js_components_backend_pages_table_TablesTable_vue":1,"resources_js_components_welcome_vue":1}[chunkId]) return "js/" + chunkId + ".js";
+/******/ 			if ({"resources_js_components_backend_components_AlertComponent_vue":1,"resources_js_components_backend_components_SearchInput_vue":1,"resources_js_components_backend_components_TableFooterComponent_vue":1,"resources_js_components_backend_components_breadcrumbComponent_vue":1,"resources_js_components_backend_pages_category_CategoriesComponent_vue":1,"resources_js_components_backend_pages_category_CategoriesTable_vue":1,"resources_js_components_backend_pages_category_CategoryForm_vue":1,"resources_js_components_backend_pages_dashboard_HomeComponent_vue":1,"resources_js_components_backend_pages_error_404Component_vue":1,"resources_js_components_backend_pages_order_CookingOrdersComponent_vue":1,"resources_js_components_backend_pages_order_DailyOrdersComponent_vue":1,"resources_js_components_backend_pages_order_OrdersComponent_vue":1,"resources_js_components_backend_pages_pos_PosComponent_vue":1,"resources_js_components_backend_pages_product_ProductForm_vue":1,"resources_js_components_backend_pages_product_ProductTable_vue":1,"resources_js_components_backend_pages_product_ProductsComponent_vue":1,"resources_js_components_backend_pages_table_TableForm_vue":1,"resources_js_components_backend_pages_table_TablesComponent_vue":1,"resources_js_components_backend_pages_table_TablesTable_vue":1,"resources_js_components_welcome_vue":1}[chunkId]) return "js/" + chunkId + ".js";
 /******/ 			// return url for filenames based on template
 /******/ 			return undefined;
 /******/ 		};

@@ -7,6 +7,7 @@ use App\Http\Controllers\backend\api\order\OrderController;
 use App\Http\Controllers\backend\api\table\TableController;
 use App\Http\Controllers\backend\api\product\ProductController;
 use App\Http\Controllers\backend\api\category\CategoryController;
+use App\Http\Controllers\backend\api\dashboard\DashboardController;
 
 /*
 |--------------------------------------------------------------------------
@@ -33,13 +34,19 @@ Route::middleware(['auth:sanctum'])->group(function () {
         Route::get('/',[PosController::class,'getAllProducts']);
         Route::prefix('order')->group(function () {
             Route::post('/create',[PosController::class,'createOrder']);
-            Route::get('update-status',[PosController::class,'updateOrderStatus']);
+            Route::get('update-status/{id}',[PosController::class,'updateOrderStatus']);
             Route::get('delete/{id}',[PosController::class,'deleteOrder']);
         });
     });
 
     Route::prefix('orders')->group(function () {
-            Route::get('/daily',[OrderController::class,'getDailyOrders']);
+     Route::get('/daily',[OrderController::class,'getDailyOrders']);
+     Route::get('/cooking',[OrderController::class,'getCookingOrders']);
+      Route::get('/all',[OrderController::class,'getAllOrders']);
+    });
+
+    Route::prefix('dashboard')->group(function () {
+        Route::get('/analytics',[DashboardController::class,'getAnalytics']);
     });
 
 

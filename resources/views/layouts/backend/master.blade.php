@@ -38,22 +38,23 @@
             <div class="brand">
                 <a href="index-1.html" class="logo">
                     <span>
-                        <img src="{{asset('assets/images/logo-sm-1.png')}}" alt="logo-small" class="logo-sm">
+                        <img src="{{asset('assets/images/logo-sm.png')}}" alt="logo-small" class="logo-sm">
                     </span>
                     <span>
-                        <img src="{{asset('assets/images/logo-1.png')}}" alt="logo-large" class="logo-lg logo-light">
-                        <img src="{{asset('assets/images/logo-dark-1.png')}}" alt="logo-large" class="logo-lg logo-dark">
+{{--
+                        <img src="{{asset('assets/images/logo-sm-1.png')}}" alt="logo-large" class="logo-lg logo-light">
+                        <img src="{{asset('assets/images/logo-sm-1.png')}}" alt="logo-large" class="logo-lg logo-dark"> --}}
                     </span>
                 </a>
             </div>
             <div class="sidebar-user-pro media border-end">
                 <div class="position-relative mx-auto">
-                    <img src="{{asset('assets/images/users/user-4-1.jpg')}}" alt="user" class="rounded-circle thumb-md">
+                    <avatar-component class="rounded-circle me-2 thumb-sm"  name="{{auth()->user()->name}}" />
                     <span class="online-icon position-absolute end-0"><i class="mdi mdi-record text-success"></i></span>
                 </div>
                 <div class="media-body ms-2 user-detail align-self-center">
-                    <h5 class="font-14 m-0 fw-bold">Mr. Michael Hill </h5>
-                    <p class="opacity-50 mb-0">michael.hill@exemple.com</p>
+                    <h5 class="font-14 m-0 fw-bold">{{auth()->user()->name}}</h5>
+                    <small class="text-white">{{auth()->user()->email}}</small>
                 </div>
             </div>
             <div class="border-end">

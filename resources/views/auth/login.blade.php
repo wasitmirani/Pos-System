@@ -47,9 +47,9 @@
                                             <label class="form-check-label" for="customSwitchSuccess">Remember me</label>
                                         </div>
                                     </div><!--end col-->
-                                    <div class="col-sm-6 text-end">
+                                    {{-- <div class="col-sm-6 text-end">
                                         <a href="auth-recover-pw.html" class="text-muted font-13"><i class="dripicons-lock"></i> Forgot password?</a>
-                                    </div><!--end col-->
+                                    </div><!--end col--> --}}
                                 </div><!--end form-group-->
 
                                 <div class="form-group mb-0 row">
@@ -60,11 +60,11 @@
                                     </div><!--end col-->
                                 </div> <!--end form-group-->
                             </form><!--end form-->
-                            <div class="m-3 text-center text-muted">
+                            {{-- <div class="m-3 text-center text-muted">
                                 <p class="mb-0">Don't have an account ?  <a href="auth-register.html" class="text-primary ms-2">Free Resister</a></p>
-                            </div>
+                            </div> --}}
                             <hr class="hr-dashed mt-4">
-                            <div class="text-center mt-n5">
+                            {{-- <div class="text-center mt-n5">
                                 <h6 class="card-bg px-3 my-4 d-inline-block">Or Login With</h6>
                             </div>
                             <div class="d-flex justify-content-center mb-1">
@@ -77,7 +77,7 @@
                                 <a href="" class="d-flex justify-content-center align-items-center thumb-sm bg-soft-danger rounded-circle">
                                     <i class="fab fa-google align-self-center"></i>
                                 </a>
-                            </div>
+                            </div> --}}
                         </div><!--end card-body-->
                     </div><!--end card-->
                 </div><!--end col-->

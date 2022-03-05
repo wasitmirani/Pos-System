@@ -1,6 +1,6 @@
 <template>
 <div>
-       <breadcrumb active_name="Today Orders"/>
+       <breadcrumb active_name="Cooking Orders"/>
        <div class="row">
 
            <div class="col"  v-for="item in order_info" :key="item.id">
@@ -35,14 +35,12 @@
             <div class="text-end">
                <ul class="list-inline">
                   <li class="list-inline-item">
-                     <SearchInput  placeholder="Search By Order No" :apiurl="`/orders/daily?page=${this.page_num}`" @query="isQuery($event)" @loading="isLoading($event)" @reload="getOrders()" @filterdata="filterData($event)" :query_input="query"/>
+                     <SearchInput  placeholder="Search By Order No" :apiurl="`/orders/cooking?page=${this.page_num}`" @query="isQuery($event)" @loading="isLoading($event)" @reload="getOrders()" @filterdata="filterData($event)" :query_input="query"/>
                   </li>
                   <!-- <li class="list-inline-item">
                      <button type="button" class="btn btn-primary btn-sm"><i class="fas fa-filter"></i></button>
                      </li> -->
-                  <li class="list-inline-item">
-                     <router-link  class="btn btn-primary btn-sm" to="/pos-system"> New Order</router-link >
-                  </li>
+
                   <li class="list-inline-item">
                      <button type="button" class="btn btn-warning btn-sm" @click="getOrders"><i class="mdi mdi-reload"></i></button>
                   </li>
@@ -57,7 +55,7 @@
                                 <div class="card-header">
                                     <div class="row align-items-center">
                                         <div class="col">
-                                            <h4 class="card-title">Today All Orders</h4>
+                                            <h4 class="card-title">Cooking All Orders</h4>
                                         </div><!--end col-->
                                     </div>  <!--end row-->
                                 </div><!--end card-header-->
@@ -261,7 +259,7 @@ export default {
       async  getOrders(page=1){
         this.page_num=page;
         this.loading=true;
-        const url=`/orders/daily?page=${this.page_num}&query=${this.query}`;
+        const url=`/orders/cooking?page=${this.page_num}&query=${this.query}`;
          await axios.get(url).then((res)=>{
                 this.orders=res.data.daily_orders;
                 this.order_info=res.data.order_info;

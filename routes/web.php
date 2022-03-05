@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\PrintController;
 
 /*
 |--------------------------------------------------------------------------
@@ -19,6 +20,8 @@ Route::view('login', 'auth.login')->name('login');
 Route::get('/error-404', function () {
     return view('backend.error-404');
 })->name('error-404');
+Route::get('/kitchen/print/{order_id}',[PrintController::class,'getKitchenPrint']);
+Route::get('/customer/print/{order_id}',[PrintController::class,'getCustomerPrint']);
 Route::view('/{any?}', 'backend.index')->where('any', '.*')->middleware(['auth']);
 
 

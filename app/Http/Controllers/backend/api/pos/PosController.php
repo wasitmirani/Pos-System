@@ -55,10 +55,11 @@ class PosController extends Controller
     }
 
     public function updateOrderStatus(Request $request){
-        $order=Order::find($request->order_id);
+        $order=Order::find($request->id);
         $order->order_status_id=2;
         $order->payment_status_id=2;
         $order->save();
+        return response()->json(['order'=>$order,'message'=>'Order Updated Successfully']);
     }
 
     public function deleteOrder(Request $request){
