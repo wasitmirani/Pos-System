@@ -119,6 +119,10 @@
                  axios.post("/product",data).then((res)=>{
                     //   console.log(re);
                       this.$emit('created');
+                       this.$root.toast.success("product has been created successfully", {
+                timeout: 1000
+             });
+
                       this.product = {};
                       return res.data;
                   }).catch((err)=>{
@@ -130,7 +134,9 @@
               const url="/product/"+this.product.id;
               axios.put(url,data).then((res)=>{
                       this.$emit('updated');
-                    this.toastAlert('success',"Category Updated Successfully");
+                      this.$root.toast.info("product has been updated successfully", {
+                timeout: 1000
+             });
 
                   }).catch((err)=>{
                         this.errors = err.response.data.errors;

@@ -119,6 +119,10 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
         //   console.log(re);
         _this2.$emit('created');
 
+        _this2.$root.toast.success("product has been created successfully", {
+          timeout: 1000
+        });
+
         _this2.product = {};
         return res.data;
       })["catch"](function (err) {
@@ -132,7 +136,9 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       axios.put(url, data).then(function (res) {
         _this3.$emit('updated');
 
-        _this3.toastAlert('success', "Category Updated Successfully");
+        _this3.$root.toast.info("product has been updated successfully", {
+          timeout: 1000
+        });
       })["catch"](function (err) {
         _this3.errors = err.response.data.errors;
       });
