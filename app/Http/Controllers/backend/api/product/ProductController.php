@@ -43,7 +43,7 @@ class ProductController extends Controller
         return $this->product->create([
             'name'=>$request->name,
             'price'=>$request->price,
-            'description'=>$request->description,
+            'description'=>!empty($request->description) ?  $request->description : 'N/A',
             'category_id'=>$request->category_id,
             'thumbnail'=>$thumbnail,
             'slug'=>Str::snake($request->name, '-'),
@@ -70,7 +70,7 @@ class ProductController extends Controller
             'price'=>$request->price,
             'description'=>$request->description,
             'category_id'=>$request->category_id,
-            'thumbnail'=>'ww',
+            // 'thumbnail'=>'ww',
             'slug'=>Str::snake($request->name, '-'),
         ]);
     }

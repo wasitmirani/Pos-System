@@ -15,7 +15,11 @@ class PosController extends Controller
     //
     public function getAllProducts(){
         $q=!empty(request('query')) ? request('query') : "";
-    $products=Product::latest()->where('name','LIKE','%'.$q.'%')->with('category:id,name')->get();
+    $products=Product::latest()->where('name','LIKE','%'.$q.'%');
+    if(!empty(request('category_id'))){
+        $products=$products->where('category_id',request('category_id'));
+    }
+    $products=$products->with('category:id,name')->get();
     $category=new Category();
 
     $req=(object)['paginate'=>false];
@@ -28,7 +32,13 @@ class PosController extends Controller
         $order=new Order();
 
         $latestOrder =Order::orderBy('created_at','DESC')->first();
-        $order_no= '#'.str_pad($latestOrder->id + 1, 4, "0", STR_PAD_LEFT);
+        if(empty( $latestOrder)){
+            $id=1;
+        }
+        else{
+            $id=$latestOrder->id ;
+        }
+        $order_no= '#'.str_pad($id+ 1, 4, "0", STR_PAD_LEFT);
         $order=$order->create([
             'table_id'=>$request->order['table_id'],
             'user_id'=>$request->user()->id,
@@ -44,7 +54,8 @@ class PosController extends Controller
                 'order_id'=>$order->id,
                 'product_id'=>$item['id'],
                 'quantity'=>$item['qty'],
-
+                'created_at'=>date('Y-m-d H:i:s'),
+                'updated_at'=> date('Y-m-d H:i:s'),
                 'price'=>$item['price'],
                 'total'=>$item['qty']*$item['price'],
             ];

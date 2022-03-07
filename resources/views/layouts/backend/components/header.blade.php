@@ -206,8 +206,8 @@
                     </div>
                 </a>
                 <div class="dropdown-menu dropdown-menu-end">
-                    <a class="dropdown-item" href="#"><i class="ti ti-user font-16 me-1 align-text-bottom"></i> Profile</a>
-                    <a class="dropdown-item" href="#"><i class="ti ti-settings font-16 me-1 align-text-bottom"></i> Settings</a>
+                    <router-link class="dropdown-item" to="/profile"><i class="ti ti-user font-16 me-1 align-text-bottom"></i> Profile</router-link>
+                    <router-link class="dropdown-item" to="/profile"><i class="ti ti-settings font-16 me-1 align-text-bottom"></i> Settings</router-link>
                     <div class="dropdown-divider mb-0"></div>
                     <a class="dropdown-item" href="{{ route('logout') }}"
                     onclick="event.preventDefault();

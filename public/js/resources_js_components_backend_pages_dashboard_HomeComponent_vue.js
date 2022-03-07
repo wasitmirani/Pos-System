@@ -130,7 +130,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         }
       });
 
-      var chart = new ApexCharts(document.querySelector("#Revenu_Status"), options);
+      var chart = new ApexCharts(document.querySelector("#Revenu_Chart"), options);
       chart.render();
     },
     getAnalytics: function getAnalytics() {
@@ -381,7 +381,7 @@ var _hoisted_12 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElement
 }, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
   "class": ""
 }, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
-  id: "Revenu_Status_bar",
+  id: "Revenu_Chart_bar",
   "class": "apex-charts mb-n4"
 })])], -1
 /* HOISTED */
@@ -469,7 +469,7 @@ var _hoisted_35 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElement
 
 var _hoisted_36 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createStaticVNode)("<div class=\"card\"><div class=\"card-header\"><div class=\"row align-items-center\"><div class=\"col\"><h4 class=\"card-title\">View Orders</h4></div><!--end col--></div><!--end row--></div><!--end card-header--><div class=\"card-body\"><div class=\"row align-items-center\"><div class=\"col-auto\"><i class=\"las la-file-invoice-dollar font-36 text-muted\"></i></div><!--end col--><div class=\"col\"><div class=\"input-group\"><select class=\"form-select\"><option selected>--- Select ---</option><option value=\"Jan 2021\">Jan 2022</option><option value=\"Feb 2021\">Feb 2022</option><option value=\"Mar 2021\">Mar 2022</option><!-- &lt;option value=&quot;Apr 2021&quot;&gt;Apr 2021&lt;/option&gt; --></select><button class=\"btn btn-soft-primary btn-sm\" type=\"button\"><i class=\"las la-search\"></i></button></div></div><!--end col--></div><!--end row--></div><!--end card-body--></div>", 1);
 
-var _hoisted_37 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createStaticVNode)("<div class=\"col-lg-8\"><div class=\"card\"><div class=\"card-header\"><div class=\"row align-items-center\"><div class=\"col\"><h4 class=\"card-title\">Orders By Date</h4></div><!--end col--><div class=\"col-auto\"><div class=\"dropdown\"><!-- &lt;a href=&quot;#&quot; class=&quot;btn btn-sm btn-outline-light dropdown-toggle&quot; data-bs-toggle=&quot;dropdown&quot; aria-haspopup=&quot;true&quot; aria-expanded=&quot;false&quot;&gt;\n                                                   This Month&lt;i class=&quot;las la-angle-down ms-1&quot;&gt;&lt;/i&gt;\n                                                &lt;/a&gt; --><!-- &lt;div class=&quot;dropdown-menu dropdown-menu-end&quot;&gt;\n                                                    &lt;a class=&quot;dropdown-item&quot; href=&quot;#&quot;&gt;Today&lt;/a&gt;\n                                                    &lt;a class=&quot;dropdown-item&quot; href=&quot;#&quot;&gt;Last Week&lt;/a&gt;\n                                                    &lt;a class=&quot;dropdown-item&quot; href=&quot;#&quot;&gt;Last Month&lt;/a&gt;\n                                                    &lt;a class=&quot;dropdown-item&quot; href=&quot;#&quot;&gt;This Year&lt;/a&gt;\n                                                &lt;/div&gt; --></div></div><!--end col--></div><!--end row--></div><!--end card-header--><div class=\"card-body\"><div class=\"\"><div id=\"Revenu_Status\" class=\"apex-charts\"></div></div></div><!--end card-body--></div><!--end card--></div>", 1);
+var _hoisted_37 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createStaticVNode)("<div class=\"col-lg-8\"><div class=\"card\"><div class=\"card-header\"><div class=\"row align-items-center\"><div class=\"col\"><h4 class=\"card-title\">Orders By Date</h4></div><!--end col--><div class=\"col-auto\"><div class=\"dropdown\"><!-- &lt;a href=&quot;#&quot; class=&quot;btn btn-sm btn-outline-light dropdown-toggle&quot; data-bs-toggle=&quot;dropdown&quot; aria-haspopup=&quot;true&quot; aria-expanded=&quot;false&quot;&gt;\n                                                   This Month&lt;i class=&quot;las la-angle-down ms-1&quot;&gt;&lt;/i&gt;\n                                                &lt;/a&gt; --><!-- &lt;div class=&quot;dropdown-menu dropdown-menu-end&quot;&gt;\n                                                    &lt;a class=&quot;dropdown-item&quot; href=&quot;#&quot;&gt;Today&lt;/a&gt;\n                                                    &lt;a class=&quot;dropdown-item&quot; href=&quot;#&quot;&gt;Last Week&lt;/a&gt;\n                                                    &lt;a class=&quot;dropdown-item&quot; href=&quot;#&quot;&gt;Last Month&lt;/a&gt;\n                                                    &lt;a class=&quot;dropdown-item&quot; href=&quot;#&quot;&gt;This Year&lt;/a&gt;\n                                                &lt;/div&gt; --></div></div><!--end col--></div><!--end row--></div><!--end card-header--><div class=\"card-body\"><div class=\"\"><div id=\"Revenu_Chart\" class=\"apex-charts\"></div></div></div><!--end card-body--></div><!--end card--></div>", 1);
 
 var _hoisted_38 = {
   "class": "row"

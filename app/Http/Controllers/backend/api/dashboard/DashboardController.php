@@ -24,6 +24,10 @@ class DashboardController extends Controller
 
         $total_revenue=$total_orders->where('payment_status_id',2)->sum('total');
         $today_revenue=Order::latest()->where('payment_status_id',2)->whereDate('created_at', Carbon::today())->sum('total');
+        $items=OrderItem::latest()->whereDate('created_at', Carbon::today())
+        ->groupBy('product_id')
+        ->selectRaw('product_id,sum(quantity) as quantity,sum(price) as price,sum(total) as total')
+        ->with('product:id,name')->take(5)->get();
         $order_stat=[
             'total_revenue'=>$total_revenue,
             'total_orders'=>count($total_orders),

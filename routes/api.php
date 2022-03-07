@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\backend\api\pos\PosController;
 use App\Http\Controllers\backend\api\order\OrderController;
 use App\Http\Controllers\backend\api\table\TableController;
+use App\Http\Controllers\backend\api\report\ReportController;
 use App\Http\Controllers\backend\api\product\ProductController;
 use App\Http\Controllers\backend\api\category\CategoryController;
 use App\Http\Controllers\backend\api\dashboard\DashboardController;
@@ -50,4 +51,10 @@ Route::middleware(['auth:sanctum'])->group(function () {
     });
 
 
+
+
+});
+Route::prefix('report')->group(function () {
+    Route::get('/daily',[ReportController::class,'getDailyReport']);
+    Route::get('/monthly',[ReportController::class,'getMonthlyReport']);
 });

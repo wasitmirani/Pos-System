@@ -10,6 +10,7 @@
         "production": "mix --production"
     },
     "dependencies": {
+        "@vueform/multiselect": "^2.3.3",
         "jquery": "^3.6.0",
         "laravel-vue-pagination": "^3.0.0",
         "moment": "^2.29.1",

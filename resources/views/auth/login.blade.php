@@ -11,7 +11,7 @@
                     <div class="card">
                         <div class="card-body p-0 auth-header-box">
                             <div class="text-center p-3">
-                                <a href="index.html" class="logo logo-admin">
+                                <a href="#" class="logo logo-admin">
                                     <img src="{{asset('assets/images/logo-sm.png')}}" height="50" alt="logo" class="auth-logo">
                                 </a>
                                 <h4 class="mt-3 mb-1 fw-semibold text-white font-18">Let's Get Started {{config('app.name')}}</h4>

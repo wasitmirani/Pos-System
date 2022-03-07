@@ -20,7 +20,7 @@
                                         </div><!--end col-->
                                         <div class="col-auto align-self-center">
                                             <div class="">
-                                                <div id="Revenu_Status_bar" class="apex-charts mb-n4"></div>
+                                                <div id="Revenu_Chart_bar" class="apex-charts mb-n4"></div>
                                             </div>
                                         </div><!--end col-->
                                     </div><!--end row-->
@@ -129,7 +129,7 @@
                                 </div><!--end card-header-->
                                 <div class="card-body">
                                     <div class="">
-                                        <div id="Revenu_Status" class="apex-charts"></div>
+                                        <div id="Revenu_Chart" class="apex-charts"></div>
                                     </div>
                                 </div><!--end card-body-->
                             </div><!--end card-->
@@ -294,7 +294,7 @@ var options = {
     },
   };
 
-  var chart = new ApexCharts(document.querySelector("#Revenu_Status"), options);
+  var chart = new ApexCharts(document.querySelector("#Revenu_Chart"), options);
   chart.render();
         },
         getAnalytics(){

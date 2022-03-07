@@ -16,7 +16,7 @@ class HelperComponent
                 "single_link" => setSingleLink("Pos", "printer", "pos-view", "/pos-system"),
             ],
             [
-                "single_link" => setSingleLink("Cooking Status", "bell", "kitchen-view", "/cooking-orders"),
+                "single_link" => setSingleLink("Pending Orders", "bell", "kitchen-view", "/cooking-orders"),
             ],
             [
                 "menu" => [
@@ -35,45 +35,38 @@ class HelperComponent
                             null,
                             "orders-view",
                             "/orders",
-                        ),
-
+                        )
 
 
                        ]
                ]
                ],
 
-            //   [
+              [
 
-            //     "menu" => [
-            //         "title" => 'User Management',
-            //         'can'=>'user-management-dropdown',
-            //         "icon" => "user",
-            //         "sub_menu" => [
-            //             setSubMenu(
-            //                 "Users",
-            //                 null,
-            //                 "users-view",
-            //                 "/users",
-            //             ),
-            //             setSubMenu(
-            //                 "Roles",
-            //                 null,
-            //                 "roles-view",
-            //                 "/roles",
-            //             ),
-            //             setSubMenu(
-            //                 "Permissions",
-            //                 null,
-            //                 "permissions-view",
-            //                 "/permissions",
-            //             ),
+                "menu" => [
+                    "title" => 'Reports',
+                    'can'=>'user-management-dropdown',
+                    "icon" => "trending-up",
+                    "sub_menu" => [
+                        setSubMenu(
+                            "Daily Sales",
+                            null,
+                            "daily-sales-view",
+                            "/daily-sales",
+                        ),
+                        setSubMenu(
+                            "Monthly Sales",
+                            null,
+                            "monthly-sales-view",
+                            "/monthly-sales",
+                        ),
 
-            //         ]
+                    ]
 
-            //  ],
+             ],
 
-            // ],
+            ],
 
             [
                 "single_link" => setSingleLink("Categories", "link", "categories-view", "/categories"),
@@ -84,6 +77,7 @@ class HelperComponent
             [
                 "single_link" => setSingleLink("Tables", "link", "tables-view", "/tables"),
             ],
+
 
         ];
     }

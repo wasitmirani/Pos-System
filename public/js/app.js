@@ -23214,6 +23214,24 @@ var routes = [{
     permissions: "daily-orders-view"
   }
 }, {
+  path: "/daily-sales",
+  component: function component() {
+    return setComponent("report/DailySales");
+  },
+  name: "daily-sales",
+  meta: {
+    permissions: "daily-sales-view"
+  }
+}, {
+  path: "/monthly-sales",
+  component: function component() {
+    return setComponent("report/MonthlySales");
+  },
+  name: "monthly-sales",
+  meta: {
+    permissions: "monthly-sales-view"
+  }
+}, {
   path: "/cooking-orders",
   component: function component() {
     return setComponent("order/CookingOrders");
@@ -23230,6 +23248,15 @@ var routes = [{
   name: "orders",
   meta: {
     permissions: "orders-view"
+  }
+}, {
+  path: "/profile",
+  component: function component() {
+    return setComponent("profile/Profile");
+  },
+  name: "profile",
+  meta: {
+    permissions: "profile-view"
   }
 }];
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ((0,vue_router__WEBPACK_IMPORTED_MODULE_0__.createRouter)({
@@ -81105,6 +81132,36 @@ var map = {
 		9,
 		"resources_js_components_backend_pages_product_ProductsComponent_vue"
 	],
+	"./components/backend/pages/profile/ProfileComponent": [
+		"./resources/js/components/backend/pages/profile/ProfileComponent.vue",
+		9,
+		"resources_js_components_backend_pages_profile_ProfileComponent_vue"
+	],
+	"./components/backend/pages/profile/ProfileComponent.vue": [
+		"./resources/js/components/backend/pages/profile/ProfileComponent.vue",
+		9,
+		"resources_js_components_backend_pages_profile_ProfileComponent_vue"
+	],
+	"./components/backend/pages/report/DailySalesComponent": [
+		"./resources/js/components/backend/pages/report/DailySalesComponent.vue",
+		9,
+		"resources_js_components_backend_pages_report_DailySalesComponent_vue"
+	],
+	"./components/backend/pages/report/DailySalesComponent.vue": [
+		"./resources/js/components/backend/pages/report/DailySalesComponent.vue",
+		9,
+		"resources_js_components_backend_pages_report_DailySalesComponent_vue"
+	],
+	"./components/backend/pages/report/MonthlySalesComponent": [
+		"./resources/js/components/backend/pages/report/MonthlySalesComponent.vue",
+		9,
+		"resources_js_components_backend_pages_report_MonthlySalesComponent_vue"
+	],
+	"./components/backend/pages/report/MonthlySalesComponent.vue": [
+		"./resources/js/components/backend/pages/report/MonthlySalesComponent.vue",
+		9,
+		"resources_js_components_backend_pages_report_MonthlySalesComponent_vue"
+	],
 	"./components/backend/pages/table/TableForm": [
 		"./resources/js/components/backend/pages/table/TableForm.vue",
 		9,
@@ -82424,7 +82481,7 @@ module.exports = JSON.parse('{"name":"axios","version":"0.21.4","description":"P
 /******/ 		// This function allow to reference async chunks
 /******/ 		__webpack_require__.u = (chunkId) => {
 /******/ 			// return url for filenames not based on template
-/******/ 			if ({"resources_js_components_backend_components_AlertComponent_vue":1,"resources_js_components_backend_components_SearchInput_vue":1,"resources_js_components_backend_components_TableFooterComponent_vue":1,"resources_js_components_backend_components_breadcrumbComponent_vue":1,"resources_js_components_backend_pages_category_CategoriesComponent_vue":1,"resources_js_components_backend_pages_category_CategoriesTable_vue":1,"resources_js_components_backend_pages_category_CategoryForm_vue":1,"resources_js_components_backend_pages_dashboard_HomeComponent_vue":1,"resources_js_components_backend_pages_error_404Component_vue":1,"resources_js_components_backend_pages_order_CookingOrdersComponent_vue":1,"resources_js_components_backend_pages_order_DailyOrdersComponent_vue":1,"resources_js_components_backend_pages_order_OrdersComponent_vue":1,"resources_js_components_backend_pages_pos_PosComponent_vue":1,"resources_js_components_backend_pages_product_ProductForm_vue":1,"resources_js_components_backend_pages_product_ProductTable_vue":1,"resources_js_components_backend_pages_product_ProductsComponent_vue":1,"resources_js_components_backend_pages_table_TableForm_vue":1,"resources_js_components_backend_pages_table_TablesComponent_vue":1,"resources_js_components_backend_pages_table_TablesTable_vue":1,"resources_js_components_welcome_vue":1}[chunkId]) return "js/" + chunkId + ".js";
+/******/ 			if ({"resources_js_components_backend_components_AlertComponent_vue":1,"resources_js_components_backend_components_SearchInput_vue":1,"resources_js_components_backend_components_TableFooterComponent_vue":1,"resources_js_components_backend_components_breadcrumbComponent_vue":1,"resources_js_components_backend_pages_category_CategoriesComponent_vue":1,"resources_js_components_backend_pages_category_CategoriesTable_vue":1,"resources_js_components_backend_pages_category_CategoryForm_vue":1,"resources_js_components_backend_pages_dashboard_HomeComponent_vue":1,"resources_js_components_backend_pages_error_404Component_vue":1,"resources_js_components_backend_pages_order_CookingOrdersComponent_vue":1,"resources_js_components_backend_pages_order_DailyOrdersComponent_vue":1,"resources_js_components_backend_pages_order_OrdersComponent_vue":1,"resources_js_components_backend_pages_pos_PosComponent_vue":1,"resources_js_components_backend_pages_product_ProductForm_vue":1,"resources_js_components_backend_pages_product_ProductTable_vue":1,"resources_js_components_backend_pages_product_ProductsComponent_vue":1,"resources_js_components_backend_pages_profile_ProfileComponent_vue":1,"resources_js_components_backend_pages_report_DailySalesComponent_vue":1,"resources_js_components_backend_pages_report_MonthlySalesComponent_vue":1,"resources_js_components_backend_pages_table_TableForm_vue":1,"resources_js_components_backend_pages_table_TablesComponent_vue":1,"resources_js_components_backend_pages_table_TablesTable_vue":1,"resources_js_components_welcome_vue":1}[chunkId]) return "js/" + chunkId + ".js";
 /******/ 			// return url for filenames based on template
 /******/ 			return undefined;
 /******/ 		};

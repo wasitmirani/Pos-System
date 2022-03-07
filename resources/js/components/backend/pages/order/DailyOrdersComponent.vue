@@ -139,9 +139,9 @@
 
 <script>
 import breadcrumb from "../../components/breadcrumbComponent.vue";
- import SearchInput  from  "../../components/SearchInput.vue";
+import SearchInput  from  "../../components/SearchInput.vue";
 import TableFooterComponent from "../../components/TableFooterComponent.vue";
-   import AvatarComponent from "../../components/AvatarComponent.vue";
+import AvatarComponent from "../../components/AvatarComponent.vue";
 export default {
     components:{breadcrumb,SearchInput,TableFooterComponent,AvatarComponent},
 

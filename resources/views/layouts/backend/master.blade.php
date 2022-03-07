@@ -36,10 +36,10 @@
         <div class="left-sidebar">
             <!-- LOGO -->
             <div class="brand">
-                <a href="index-1.html" class="logo">
-                    <span>
-                        <img src="{{asset('assets/images/logo-sm.png')}}" alt="logo-small" class="logo-sm">
-                    </span>
+                <a href="#" class="logo">
+                    <h2 class="logo-lg logo-light text-white">
+                       {{config('app.name')}}
+                    </h2>
                     <span>
 {{--
                         <img src="{{asset('assets/images/logo-sm-1.png')}}" alt="logo-large" class="logo-lg logo-light">

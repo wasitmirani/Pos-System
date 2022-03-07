@@ -79,7 +79,7 @@ class CategoryController extends Controller
         return $this->category->where('id',$id)->update([
             'name'=>$request->name,
             'slug'=>Str::snake($request->name, '-'),
-            'description'=>$request->description,
+            'description'=>!empty($request->description) ?  $request->description : 'N/A',
         ]);
         //
     }

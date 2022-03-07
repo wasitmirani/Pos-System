@@ -6,7 +6,21 @@
             <div class="card">
                <div class="card-header">
                   <h4 class="card-title">POS System</h4>
-                  <search-input apiurl="/pos?" placeholder="Search By Product Name"  @query="isQuery($event)" @loading="isLoading($event)" @reload="getProducts()" @filterdata="filterData($event)" :query_input="query"/>
+                  <div class="row">
+                      <div class="col-6">
+                          <search-input apiurl="/pos?" placeholder="Search By Product Name"  @query="isQuery($event)" @loading="isLoading($event)" @reload="getProducts()" @filterdata="filterData($event)" :query_input="query"/>
+                      </div>
+
+                   <div class="col-6">
+                                                <select class="form-select" aria-label="Default select example" required v-model="category_id" @change="getProductsByCategory">
+                                                    <option selected value="">Select Category</option>
+                                                      <option  value="">All</option>
+                                                    <option v-for="item in categories" :key="item.id" :value="item.id">{{item.name}} </option>
+
+                                                  </select>
+                                            </div>
+                  </div>
+
                </div>
                <div class="card-body" id="products_menu">
                  <div class="row" v-if="products.length<1">
@@ -21,25 +35,33 @@
                      <div class="spinner-border text-dark" role="status"></div>
                   </div>
 
-                     <div class="col-md-4" v-for="item in products" :key="item.id" v-else>
-                        <div class="card">
-                           <div class="card-body" >
-                              <span class="badge bg-dark">{{item.category.name}}</span>
-                              <div class="text-center">
-                                 <img :src="item.thumbnail" alt="" class="thumb-md rounded-circle" >
+                     <div class="col-md-4 mb-2" v-for="item in products" :key="item.id" v-else>
+                         <div class="card">
+                                <div class="card-body">
+                                     <span class="badge bg-dark">{{item.category.name}}</span>
+                                        <div style="float:right">
+                                         <button type="button" class="btn btn-primary"  @click="addCart(item)"><i class="mdi mdi-shopping me-2"></i> Add</button>
+                                        </div>
+                                      <img :src="item.thumbnail" alt=""  class="img-fluid px-2 px-lg-5" v-if="item.thumbnail!=null">
 
-                              </div>
-                              <!--end media-->
-                              <div class=" ms-2">
-                                 <small class="mb-2"  data-bs-toggle="tooltip" data-bs-placement="top" :title="item.name"> {{ item.name.slice(0, 20)+"..."  }}</small>
-                                 <div style="float:right">
-                                    <button type="button" @click="addCart(item)" class="btn btn-danger btn-icon-square-sm">
-                                    <i class="mdi mdi-shopping"></i></button>
-                                 </div>
-                              </div>
-                           </div>
-                           <!--end card-body-->
-                        </div>
+                                   <AvatarComponent class="thumb-xl justify-content-center d-flex align-items-center bg-soft-success rounded-circle me-2" :name="item.name" v-else/>
+
+                                    <hr class="hr-dashed">
+                                    <div class="d-flex justify-content-between">
+                                        <div>
+                                            <a href="#" class="font-15 fw-bold text-primary">{{item.name}}</a>
+
+
+                                        </div>
+                                        <div class="align-self-center">
+                                            <h6 class="fw-bold font-22 m-0">Rs.{{item.price}}</h6>
+                                        </div>
+
+
+
+                                    </div>
+                                </div><!--end card-body-->
+                            </div>
                      </div>
                   </div>
                   <!--end col-->
@@ -159,10 +181,12 @@
 </template>
 <script>
    import breadcrumb from "../../components/breadcrumbComponent.vue";
-    import SearchInput from "../../components/SearchInput.vue";
+   import SearchInput from "../../components/SearchInput.vue";
+       import AvatarComponent from "../../components/AvatarComponent.vue";
+
 
    export default {
-      components:{breadcrumb,SearchInput},
+      components:{breadcrumb,SearchInput,AvatarComponent},
 
       data(){
           return{
@@ -171,6 +195,7 @@
            loading:false,
            table_id:"",
            order_type:"",
+           category_id:"",
            query:"",
            cart_items:[],
            tables:[],
@@ -186,6 +211,15 @@
             }
         },
       methods:{
+         async getProductsByCategory(){
+               this.loading=true;
+             await axios.get('/pos?category_id='+this.category_id).then((res)=>{
+                 this.products=res.data.products;
+                 this.categories=res.data.categories;
+                 this.tables=res.data.tables;
+                 this.loading=false;
+             });
+          },
           filterData(data){
         this.products = data.products;
         console.log(this.loading);
@@ -294,15 +328,16 @@
       },
    }
 </script>
+
 <style>
 #sidebar {
 
-    height:300px;
+    height:400px;
     overflow-y: scroll;
 }
 #products_menu {
 
-    height:450px;
+    height:620px;
     overflow-y: scroll;
 }
 </style>

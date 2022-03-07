@@ -229,6 +229,8 @@ var _hoisted_22 = {
 function render(_ctx, _cache, $props, $setup, $data, $options) {
   var _component_AlertComponent = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("AlertComponent");
 
+  var _component_AvatarComponent = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("AvatarComponent");
+
   var _component_TableFooterComponent = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("TableFooterComponent");
 
   var _component_Pagination = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("Pagination");
@@ -241,13 +243,20 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
   }, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)($props.products.data, function (item) {
     return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("tr", {
       key: item.id
-    }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("td", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_5, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" <AvatarComponent :name=\"item.name\" /> "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("img", {
+    }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("td", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_5, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" <AvatarComponent :name=\"item.name\" /> "), item.thumbnail != null ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("img", {
+      key: 0,
       src: item.thumbnail,
-      alt: "user",
-      "class": "thumb-md rounded-circle"
+      alt: "",
+      "class": "thumb-xl rounded-circle"
     }, null, 8
     /* PROPS */
-    , _hoisted_6), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_7, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("h6", _hoisted_8, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(item.name), 1
+    , _hoisted_6)) : ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)(_component_AvatarComponent, {
+      key: 1,
+      "class": "thumb-md justify-content-center d-flex align-items-center bg-soft-success rounded-circle me-2",
+      name: item.name
+    }, null, 8
+    /* PROPS */
+    , ["name"])), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_7, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("h6", _hoisted_8, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(item.name), 1
     /* TEXT */
     ), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("a", {
       role: "button",

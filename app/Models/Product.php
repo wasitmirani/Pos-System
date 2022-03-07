@@ -19,7 +19,7 @@ class Product extends Model
         if(!empty($value))
         return asset('/uploads/products/'.$value);
         else
-        return asset('/uploads/products/default.png');
+        return null;
     }
     public function setCurrencyAttribute($value)
     {

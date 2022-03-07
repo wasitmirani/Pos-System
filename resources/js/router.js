@@ -47,12 +47,24 @@ const routes = [
         meta: { permissions: "daily-orders-view" }
     },
     {
+        path: "/daily-sales", component: () => setComponent("report/DailySales"), name: "daily-sales",
+        meta: { permissions: "daily-sales-view" }
+    },
+    {
+        path: "/monthly-sales", component: () => setComponent("report/MonthlySales"), name: "monthly-sales",
+        meta: { permissions: "monthly-sales-view" }
+    },
+    {
         path: "/cooking-orders", component: () => setComponent("order/CookingOrders"), name: "cooking-orders",
         meta: { permissions: "cooking-orders-view" }
     },
     {
         path: "/orders", component: () => setComponent("order/Orders"), name: "orders",
         meta: { permissions: "orders-view" }
+    },
+    {
+        path: "/profile", component: () => setComponent("profile/Profile"), name: "profile",
+        meta: { permissions: "profile-view" }
     },
 
 
