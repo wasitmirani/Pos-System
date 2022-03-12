@@ -176,6 +176,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       loading: false,
       table_id: "",
       order_type: "",
+      order_id: "",
       category_id: "",
       query: "",
       cart_items: [],
@@ -353,6 +354,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
   },
   mounted: function mounted() {
     localStorage.getItem('cart_items') ? this.cart_items = JSON.parse(localStorage.getItem('cart_items')) : this.cart_items = [];
+    this.order_id = this.$route.query.order_id;
     this.getProducts();
   }
 });
@@ -580,7 +582,10 @@ var _hoisted_18 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElement
 );
 
 var _hoisted_19 = {
-  "class": "card"
+  "class": "card",
+  style: {
+    "border": "dashed"
+  }
 };
 var _hoisted_20 = {
   "class": "card-body"

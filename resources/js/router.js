@@ -63,6 +63,10 @@ const routes = [
         meta: { permissions: "orders-view" }
     },
     {
+        path: "/order-details", component: () => setComponent("order/OrderDetails"), name: "order-details",
+        meta: { permissions: "orders-details-view" }
+    },
+    {
         path: "/profile", component: () => setComponent("profile/Profile"), name: "profile",
         meta: { permissions: "profile-view" }
     },

@@ -29,7 +29,7 @@
                                             </ul>
 
                                         </div><!--end col-->
-                                     
+
                                     </div><!--end row-->
                                 </div><!--end f_profile-->
                             </div><!--end card-body-->
@@ -39,7 +39,7 @@
 
 
                                     <li class="nav-item">
-                                        <a class="nav-link" data-bs-toggle="tab" href="#Settings" role="tab" aria-selected="false">Settings</a>
+                                        <a class="nav-link active" data-bs-toggle="tab" href="#Settings" role="tab" aria-selected="false">Settings</a>
                                     </li>
                                 </ul>
 
@@ -60,17 +60,12 @@
                                                     </div><!--end card-header-->
                                                     <div class="card-body">
                                                         <div class="form-group mb-3 row">
-                                                            <label class="col-xl-3 col-lg-3 text-end mb-lg-0 align-self-center form-label">First Name</label>
+                                                            <label class="col-xl-3 col-lg-3 text-end mb-lg-0 align-self-center form-label">Full Name</label>
                                                             <div class="col-lg-9 col-xl-8">
-                                                                <input class="form-control" type="text" value="Rosa">
+                                                                <input class="form-control" type="text" v-model="auth_user.name">
                                                             </div>
                                                         </div>
-                                                        <div class="form-group mb-3 row">
-                                                            <label class="col-xl-3 col-lg-3 text-end mb-lg-0 align-self-center form-label">Last Name</label>
-                                                            <div class="col-lg-9 col-xl-8">
-                                                                <input class="form-control" type="text" value="Dodson">
-                                                            </div>
-                                                        </div>
+
                                                         <div class="form-group mb-3 row">
                                                             <label class="col-xl-3 col-lg-3 text-end mb-lg-0 align-self-center form-label">Company Name</label>
                                                             <div class="col-lg-9 col-xl-8">
@@ -79,21 +74,13 @@
                                                             </div>
                                                         </div>
 
-                                                        <div class="form-group mb-3 row">
-                                                            <label class="col-xl-3 col-lg-3 text-end mb-lg-0 align-self-center form-label">Contact Phone</label>
-                                                            <div class="col-lg-9 col-xl-8">
-                                                                <div class="input-group">
-                                                                    <span class="input-group-text"><i class="las la-phone"></i></span>
-                                                                    <input type="text" class="form-control" value="+123456789" placeholder="Phone" aria-describedby="basic-addon1">
-                                                                </div>
-                                                            </div>
-                                                        </div>
+
                                                         <div class="form-group mb-3 row">
                                                             <label class="col-xl-3 col-lg-3 text-end mb-lg-0 align-self-center form-label">Email Address</label>
                                                             <div class="col-lg-9 col-xl-8">
                                                                 <div class="input-group">
                                                                     <span class="input-group-text"><i class="las la-at"></i></span>
-                                                                    <input type="text" class="form-control" value="rosa.dodson@demo.com" placeholder="Email" aria-describedby="basic-addon1">
+                                                                    <input type="text" class="form-control" v-model="auth_user.email" placeholder="Email" aria-describedby="basic-addon1">
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -109,8 +96,8 @@
 
                                                         <div class="form-group mb-3 row">
                                                             <div class="col-lg-9 col-xl-8 offset-lg-3">
-                                                                <button type="submit" class="btn btn-de-primary">Submit</button>
-                                                                <button type="button" class="btn btn-de-danger">Cancel</button>
+                                                                <button type="submit" class="btn btn-primary">Update</button>
+
                                                             </div>
                                                         </div>
                                                     </div>
@@ -126,7 +113,7 @@
                                                             <label class="col-xl-3 col-lg-3 text-end mb-lg-0 align-self-center form-label">Current Password</label>
                                                             <div class="col-lg-9 col-xl-8">
                                                                 <input class="form-control" type="password" placeholder="Password">
-                                                                <a href="#" class="text-primary font-12">Forgot password ?</a>
+
                                                             </div>
                                                         </div>
                                                         <div class="form-group mb-3 row">
@@ -143,34 +130,13 @@
                                                         </div>
                                                         <div class="form-group mb-3 row">
                                                             <div class="col-lg-9 col-xl-8 offset-lg-3">
-                                                                <button type="submit" class="btn btn-de-primary">Change Password</button>
-                                                                <button type="button" class="btn btn-de-danger">Cancel</button>
+                                                                <button type="submit" class="btn btn-primary">Change Password</button>
+
                                                             </div>
                                                         </div>
                                                     </div><!--end card-body-->
                                                 </div><!--end card-->
-                                                <div class="card">
-                                                    <div class="card-header">
-                                                        <h4 class="card-title">Other Settings</h4>
-                                                    </div><!--end card-header-->
-                                                    <div class="card-body">
 
-                                                        <div class="form-check">
-                                                            <input class="form-check-input" type="checkbox" value="" id="Email_Notifications" checked="">
-                                                            <label class="form-check-label" for="Email_Notifications">
-                                                                Email Notifications
-                                                            </label>
-                                                            <span class="form-text text-muted font-12 mt-0">Do you need them?</span>
-                                                          </div>
-                                                          <div class="form-check">
-                                                            <input class="form-check-input" type="checkbox" value="" id="API_Access">
-                                                            <label class="form-check-label" for="API_Access">
-                                                                API Access
-                                                            </label>
-                                                            <span class="form-text text-muted font-12 mt-0">Enable/Disable access</span>
-                                                        </div>
-                                                    </div><!--end card-body-->
-                                                </div><!--end card-->
                                             </div> <!-- end col -->
                                         </div><!--end row-->
                                     </div>

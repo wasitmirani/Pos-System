@@ -43,7 +43,8 @@ Route::middleware(['auth:sanctum'])->group(function () {
     Route::prefix('orders')->group(function () {
      Route::get('/daily',[OrderController::class,'getDailyOrders']);
      Route::get('/cooking',[OrderController::class,'getCookingOrders']);
-      Route::get('/all',[OrderController::class,'getAllOrders']);
+     Route::get('/all',[OrderController::class,'getAllOrders']);
+      Route::get('/order-items/{id}',[OrderController::class,'getCurrentOrderItems']);
     });
 
     Route::prefix('dashboard')->group(function () {

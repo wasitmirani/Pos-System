@@ -69,7 +69,11 @@
 
                   <div class="mt-4">
                      <address style="margin-bottom: 0px; !important">
-                        <strong>Date/Time: </strong> <small>{{$order->created_at->format('d-m-Y h:i:s a')}}</small> <br>
+                        @php
+                        $time = strtotime($order->created_at.' UTC');
+                         $dateInLocal = date("Y-m-d h:i:s a", $time);
+                        @endphp
+                           <strong>Date/Time: </strong> <small>{{  $dateInLocal}}</small> <br>
                         @if(!empty($order->table))
                         <strong>TableNo: </strong><span>{{$order->table->name}}</span><br>
                         @endif

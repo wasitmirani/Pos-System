@@ -36,7 +36,7 @@
                   </div>
 
                      <div class="col-md-4 mb-2" v-for="item in products" :key="item.id" v-else>
-                         <div class="card">
+                         <div class="card" style="border:dashed;">
                                 <div class="card-body">
                                      <span class="badge bg-dark">{{item.category.name}}</span>
                                         <div style="float:right">
@@ -195,6 +195,7 @@
            loading:false,
            table_id:"",
            order_type:"",
+           order_id:"",
            category_id:"",
            query:"",
            cart_items:[],
@@ -324,6 +325,8 @@
       mounted() {
           localStorage.getItem('cart_items') ?
           this.cart_items = JSON.parse(localStorage.getItem('cart_items')) : this.cart_items = [];
+          this.order_id = this.$route.query.order_id;
+
           this.getProducts();
       },
    }

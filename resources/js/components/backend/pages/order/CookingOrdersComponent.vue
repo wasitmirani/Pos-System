@@ -107,6 +107,8 @@
                                                        <small>{{dateFormat(item.created_at)}}</small>
                                                     </td>
                                                     <td>
+                                                          <a role="button" @click="edit(item)"><i class="las la-pen text-secondary font-18"></i></a>
+                                                          |
                                                         <a role="button" @click="openPrint(item)"><i class="las la-print text-secondary font-18"></i></a>
                                                         <a role="button" @click="deleted(item)"><i class="las la-trash-alt text-secondary font-18"></i></a>
                                                     </td>
@@ -176,6 +178,9 @@ export default {
                  window.open(url, '_blank').focus();
             })
 
+        },
+        edit(item){
+            this.$router.push({ path: '/pos-system', query: {order_id: item.id }})
         },
         deleted(item){
            Swal.fire({
